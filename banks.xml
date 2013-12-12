@@ -928,10 +928,10 @@
 			<pattern comment="Попытка выделить остаток" action="UPDATE_BALANS" groups="CARD_NUMBER,BALANS,VALUT_ACCOUNT"><![CDATA[.*\d{4}.{3}(\d{4})\s?.*balance:\s?([\d\.,\s-]+)(.{3}).*]]></pattern>
 		</patterns>
 	</bank>
-	<bank id="18" caption="Промсвязьбанк" serv_numbers="4556,PSB" exist_card_oper="false" exist_payees="false" min_pay_summa="0" max_pay_summa="0" icon="bank_promsb" format_dt="yyyy-MM-dd HH:mm:ss;yyyy-MM-dd" visible_key="true" key_hint="4 посл. цифр счета" number_hint="4 посл. цифр карты"><![CDATA[file:///android_asset/html/banks/promsb/info.html]]>
+	<bank id="18" caption="Промсвязьбанк" serv_numbers="4556,PSB" exist_card_oper="false" exist_payees="false" min_pay_summa="0" max_pay_summa="0" icon="bank_promsb" format_dt="dd/MM, HH:mm;yyyy-MM-dd" visible_key="true" key_hint="4 посл. цифр счета" number_hint="4 посл. цифр карты"><![CDATA[file:///android_asset/html/banks/promsb/info.html]]>
 		<patterns>
 			<types_operation>
-				<type caption="Возврат покупки" oper="+">Otmena</type>
+				<type caption="Возврат покупки" oper="+">Отмена операции</type>
 				<type caption="Оплата покупки" oper="-">Pokupka</type>
 				<type caption="Оплата покупки" oper="-">Безналичная покупка</type>
 				<type caption="Списание средств" oper="-">Beznalichnoye spisanie</type>
@@ -946,7 +946,7 @@
 				<type caption="Ошибка операции" oper="?">Neuspeshno</type>
 			</types_operation>
 			<!-- http://regexr.com?31vad 28.08.2012 -->
-			<pattern comment="Движение средств - кириллица" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,DATE,MESTO,BALANS,VALUT_ACCOUNT"><![CDATA[.*?\*(\d+):\s(.*?)\s([\d\s\.,]+)\s(.{3});\s([\d\s:,\/]+);(.*)\.Доступно\s([\d\s\.,]+)\s(.{3}).*]]></pattern>
+			<pattern comment="Движение средств - кириллица" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,DATE,MESTO,BALANS,VALUT_ACCOUNT"><![CDATA[.*?\*(\d+):\s(.*?)\s([\d\s\.,]+)\s(.{3});\s*([\d\s:,\/]+);(.*)\.Доступно\s([\d\s\.,]+)\s(.{3}).*]]></pattern>
 			<pattern comment="Ошибка движения средств - кириллица" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,DATE,MESTO,BALANS,VALUT_ACCOUNT"><![CDATA[.*?\*(\d+):\s(.*?)\s?([\d\s\.,]+)\s(.{3});\s?([\d\s:,\/]+);(.*)]]></pattern>
 			<pattern comment="Зачисление - кириллица" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,DATE,BALANS,VALUT_ACCOUNT"><![CDATA[.*?\*(\d+):\s(.*?)\s([\d\s\.,]+)\s(.{3});([\d\-]+)\.Доступно\s([\d\s\.,]+)\s(.{3}).*]]></pattern>
 			<pattern comment="Движение средств - латиница" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,CARD_NUMBER,DATE,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT"><![CDATA[(.*)\*(\d+).*?\s([\d\.-]+)\s+([\d\s\.,]+)\s(.{3}).*Ostatok\s([\d\s\.,]+)\s(.{3}).*]]></pattern>

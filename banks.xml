@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <!-- Право интеллектуальной собственности на настройки банков принадлежат автору программы Демову Алексею -->
 <!-- Банки добавил и произвел корректировки slider999 (Петров Антон) http://4pda.ru/forum/index.php?showuser=959815 -->
 <!-- Право интеллектуальной собственности на настройки банков, в которых присутствует ссылка на сайт http://regexr.com , принадлежат в том числе и slider999 -->
@@ -588,7 +588,7 @@
 			
 			</patterns>
 	</bank>
-	<bank id="7" caption="ВТБ24" serv_numbers="+00004,+79104353500,5211,VTB24,BankVTB,+79049062424,+79037672424,88001002424" exist_card_oper="true" exist_payees="false" min_pay_summa="100" max_pay_summa="0" icon="bank_vtb24" useSmsDate="true" format_dt="dd-MM-yy HH:mm" visible_key="true" key_hint="Пароль" number_hint="4 посл. цифр карты"><![CDATA[file:///android_asset/html/banks/vtb24/info.html]]>
+	<bank id="7" caption="ВТБ24" serv_numbers="+00004,+79104353500,5211,VTB24,BankVTB,+79049062424" exist_card_oper="true" exist_payees="false" min_pay_summa="100" max_pay_summa="0" icon="bank_vtb24" useSmsDate="true" format_dt="dd-MM-yy HH:mm" visible_key="true" key_hint="Пароль" number_hint="4 посл. цифр карты"><![CDATA[file:///android_asset/html/banks/vtb24/info.html]]>
 		<card_types_codes>
 			<card_types_code code="VISA" template="VI"/>
 		</card_types_codes>
@@ -618,7 +618,6 @@
 				<type caption="Оплата покупки" oper="-">Oplata</type>
 				<type caption="Внесение наличных" oper="+">Vnesenie nalichnih</type>
 				<type caption="Поступление на счет" oper="+">Uvelichen balans scheta karti</type>
-                                <type caption="Списание со счета" oper="-">Umenshen balans scheta karti</type>
 				<type caption="Списание со счета" oper="-">umenshen balans na</type>
 				<type caption="Зачисление средств" oper="+">Zachislenie sredstv</type>
 				<!-- украина -->
@@ -1513,7 +1512,7 @@
 			<pattern comment="Движение средств" action="INSERT_TO_JURNAL" groups="BALANS"><![CDATA[.*[W|\*]\s?LIMIT:([\d\.]+).*]]></pattern>
 		</patterns>
 	</bank>
-	<bank id="41" caption="Дальневосточный Банк" serv_numbers="+79025577070,+79020700300" exist_card_oper="true" exist_payees="false" min_pay_summa="0" max_pay_summa="0" icon="bank_dvb" format_dt="dd/MM/yy HH:mm:ss" useSmsDate="false" visible_key="true" key_hint="Код запроса" number_hint="4 посл. цифры карты"><![CDATA[file:///android_asset/html/banks/dvb/info.html]]>
+	<bank id="41" caption="Дальневосточный Банк" serv_numbers="+79021129973,DVB" exist_card_oper="true" exist_payees="false" min_pay_summa="0" max_pay_summa="0" icon="bank_dvb" format_dt="dd.MM.yy HH:mm:ss" useSmsDate="false" visible_key="true" key_hint="Код запроса" number_hint="4 посл. цифры карты"><![CDATA[file:///android_asset/html/banks/dvb/info.html]]>
 		<card_operations>
 			<card_operation template="BAL #KEY#" caption="Баланс (лимит доступных средств)"><![CDATA[file:///android_asset/html/banks/dvb/balans_info.html]]></card_operation>
 			<card_operation template="STM #KEY#" caption="Выписка по карте"/>
@@ -1523,15 +1522,20 @@
 			<types_operation>
 				<type caption="Пополнение счета" oper="+">Popolnenie</type>
 				<type caption="Списание за услугу SMS-информирования" oper="-">SMS Notification Fee</type>
-				<type caption="Списание/снятие в банкомате" oper="-">ATM</type>
+				<type caption="Снятие в банкомате" oper="-">ATM</type>
 				<type caption="Выдача наличных" oper="-">Cash</type>
 				<type caption="Оплата товара/услуги" oper="-">Retail</type>
+				<type caption="Отказ в оплате" oper="?">otklonena operaciya</type>
+				<type caption="Отмена операциии" oper="+">otmenena operaciya</type>
 			</types_operation>
-			<!-- http://regexr.com?318g9 -->
-			<pattern comment="Пополнение счета" action="INSERT_TO_JURNAL" groups="SUMMA,VALUT_OPERATION,TYPE_OPERATION,BALANS,VALUT_ACCOUNT"><![CDATA[.*\s([\d,]+)\s(.{3})\s.\s(.*);\s.*:\s([\d,]+)\s(.{3})]]></pattern>
-			<pattern comment="Списание за услугу SMS-информирование" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,SUMMA,VALUT_OPERATION,TYPE_OPERATION,BALANS,VALUT_ACCOUNT,DATE"><![CDATA[.*\*(\d+),\s.*\s-?([\d,]+)\s(.{3})\s\((\w.+),\s,\s,.*\);\s.*:\s([\d,]+)\s(.{3})\s.\s([\d\.]+\s[\d:]+)]]></pattern>
-			<pattern comment="Движение средств" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,SUMMA,VALUT_OPERATION,TYPE_OPERATION,MESTO,BALANS,VALUT_ACCOUNT,DATE"><![CDATA[.*\*(\d+),\s.*\s-?([\d,]+)\s(.{3})\s\((\w.+),\s.{3},\s(.*)\);\s.*:\s([\d,]+)\s(.{3})\s.\s([\d\.]+\s[\d:]+)]]></pattern>
-			<pattern comment="Запрос баланса" action="UPDATE_BALANS" groups="BALANS,VALUT_ACCOUNT"><![CDATA[[a-zA-Z\s]+([\d\s\.]+)\s(.{3}).*]]></pattern>
+			<!-- -->
+			<pattern comment="Пополнение счета" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT,DATE"><![CDATA[Schet.*\*\*(\d+)\.\s(.*)\.\sSumma\s+([\d\.]+)\s+([a-zA-Z]{3});.*?([\d\.]+)\s+([a-zA-Z]{3})(.*)]]></pattern>
+			<pattern comment="Списание за услугу SMS-информирование" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,SUMMA,VALUT_OPERATION,TYPE_OPERATION,BALANS,VALUT_ACCOUNT,DATE"><![CDATA[.*\*\*(\d+),\s+.*?,\s+summa\s+-([\d\.]+)\s+(.{3})\s+\((SMS.*),,,\).*?([\d\.]+)\s+(.{3})\s-\s([\d\.\s:]+)]]></pattern>
+			<pattern comment="Покупка" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,SUMMA,VALUT_OPERATION,TYPE_OPERATION,MESTO,BALANS,VALUT_ACCOUNT,DATE"><![CDATA[.*\*\*(\d+).*?summa\s+([\d\.]+)\s+(.{3})\s+\((Retail),\s+(.*)\).*?([\d\.]+)\s+(.{3})\s-\s([\d\.\s:]+)]]></pattern>
+			<pattern comment="Снятие в банкомате" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,SUMMA,VALUT_OPERATION,TYPE_OPERATION,MESTO,BALANS,VALUT_ACCOUNT,DATE"><![CDATA[.*\*\*(\d+).*?summa\s+([\d\.]+)\s+(.{3})\s+\((ATM),\s+(.*)\).*?([\d\.]+)\s+(.{3})\s-\s([\d\.\s:]+)]]></pattern>
+			<pattern comment="Отмена операции" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,MESTO,BALANS,VALUT_ACCOUNT,DATE"><![CDATA[.*\*\*(\d+),\s+(otme.*?)\s+na\s+summu\s+([\d\.]+)\s+(.{3})\s+\((.*)\).*?([\d\.]+)\s+(.{3})\s-\s([\d\.\s:]+)]]></pattern>
+			<pattern comment="Отказ в оплате" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,MESTO,DATE"><![CDATA[.*\*\*(\d+)\s+(.*?)\sna\ssummu\s+([\d\.]+)\s+(.{3})\s+\((.*?)\s+([\d{2}\.+]+\s+[\d{2}:+]+)]]></pattern>
+			<pattern comment="Запрос баланса" action="UPDATE_BALANS" groups="BALANS,VALUT_ACCOUNT"><![CDATA[Dostupno:\s+([\d\.]+)\s+(.{3}).*]]></pattern>
 		</patterns>
 	</bank>
 	<bank id="42" caption="Возрождение Банк" serv_numbers="2640,+79037976264,vbank.ru" exist_card_oper="true" exist_payees="false" min_pay_summa="0" max_pay_summa="0" icon="bank_vb" format_dt="dd.MM.yy" useSmsDate="true" visible_key="false" number_hint="4 посл. цифры карты"><![CDATA[file:///android_asset/html/banks/vb/info.html]]>
@@ -2017,7 +2021,7 @@
 			<pattern comment="Движение средств - работа со счетом" action="INSERT_TO_JURNAL" groups="KEY,TYPE_OPERATION,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT"><![CDATA[.*\s[\d\#]+(\d{4})\s(.*)\s([\d\s\.,]+)\s(.{3})\..*?\s([\d\s\.,]+)\s(.{3})\..*]]></pattern>
 		</patterns>
 	</bank>
-	<bank id="66" caption="ОТП Банк" serv_numbers="5927,OTP_Bank,+380931777711" exist_card_oper="true" exist_payees="false" min_pay_summa="0" max_pay_summa="0" icon="bank_otp" format_dt="dd.MM HH:mm;dd.MM.yy HH:mm" visible_key="true" key_hint="4 посл. цифр счета" number_hint="4 посл. цифр карты"><![CDATA[file:///android_asset/html/banks/otp/info.html]]>
+	<bank id="66" caption="ОТП Банк" serv_numbers="5927,OTP_Bank,+380931777711,+79037676736" exist_card_oper="true" exist_payees="false" min_pay_summa="0" max_pay_summa="0" icon="bank_otp" format_dt="dd.MM HH:mm;dd.MM.yy HH:mm" visible_key="true" key_hint="4 посл. цифр счета" number_hint="4 посл. цифр карты"><![CDATA[file:///android_asset/html/banks/otp/info.html]]>
 		<card_operations>
 			<card_operation template="bal" caption="Баланс (лимит доступных средств)"/>
 			<card_operation template="Credit" caption="Информация по кредиту"/>

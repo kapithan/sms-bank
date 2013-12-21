@@ -588,7 +588,7 @@
 			
 			</patterns>
 	</bank>
-	<bank id="7" caption="ВТБ24" serv_numbers="+00004,+79104353500,5211,VTB24,BankVTB,+79049062424,+79037672424,88001002424" exist_card_oper="true" exist_payees="false" min_pay_summa="100" max_pay_summa="0" icon="bank_vtb24" useSmsDate="true" format_dt="dd-MM-yy HH:mm" visible_key="true" key_hint="Пароль" number_hint="4 посл. цифр карты"><![CDATA[file:///android_asset/html/banks/vtb24/info.html]]>
+	<bank id="7" caption="ВТБ24" serv_numbers="+00004,+79104353500,5211,VTB24,BankVTB,+79049062424,+79037672424,88001002424,+79503742424" exist_card_oper="true" exist_payees="false" min_pay_summa="100" max_pay_summa="0" icon="bank_vtb24" useSmsDate="true" format_dt="dd-MM-yy HH:mm" visible_key="true" key_hint="Пароль" number_hint="4 посл. цифр карты"><![CDATA[file:///android_asset/html/banks/vtb24/info.html]]>
 		<card_types_codes>
 			<card_types_code code="VISA" template="VI"/>
 		</card_types_codes>

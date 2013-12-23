@@ -3092,30 +3092,32 @@
 			<pattern comment="Попытка выделить остаток" action="UPDATE_BALANS" groups="CARD_NUMBER,BALANS,VALUT_ACCOUNT"><![CDATA[.*?x(\d+)\s.*\sDostupno\s([\d,]+)\s(.{3})\s.*]]></pattern>
 		</patterns>
 	</bank>
-	<bank id="114" caption="АйМаниБанк" serv_numbers="+79055996032,+79055996031,AENBANK,IMONEYBANK" exist_card_oper="true" exist_payees="false" min_pay_summa="0" max_pay_summa="0" icon="bank_imoney" useSmsDate="true" format_dt="dd.MM.yy HH:mm" visible_key="false" key_hint="" number_hint="4 посл. цифры номера"><![CDATA[http://aenbank.ru/private/cards/sms/index.php?sphrase_id=564]]>
-		<card_operations>
-			<card_operation template="BAL*#CARD_NUMBER#" caption="Баланс (лимит доступных средств)"><![CDATA[file:///android_asset/html/banks/balans_info.html]]></card_operation>
-			<card_operation template="MS*#CARD_NUMBER#" caption="Мини-выписка по карте"></card_operation>
-			<card_operation template="BLOK*#CARD_NUMBER#" caption="Заблокировать карту"></card_operation>
-			<card_operation template="ACTIV*#CARD_NUMBER#" caption="Активировать карту"></card_operation>
-		</card_operations>
-		<patterns>
-			<types_operation>
-				<type caption="Пополнение карты" oper="+">popolnena</type>
-				<type caption="Начисление % по карте" oper="+">дохода по процентам выплаченная на счет карты</type>
-				
-				<type caption="Зачисление средств" oper="+">popolnen</type>
-				<type caption="Расход средств" oper="-">Avtorizatsiya</type>
-			</types_operation>
-			<!-- http://regexr.com?30df5 -->
-			<pattern comment="Зачисление средств" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT,DATE"><![CDATA[(.*?)\s?([\d\s\.,]+)\((.{3}).*ostatok:\s?([\d\s\.,]+)\s?(.{3});\s?([\d\s\.:]+)]]></pattern>
-			<pattern comment="Расход средств" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,SUMMA,VALUT_OPERATION,CARD_NUMBER,MESTO,BALANS,VALUT_ACCOUNT,DATE"><![CDATA[(.*?)\s?([\d\s\.,]+)\s?(.{3})\s+;KARTA:\*(\d+);.*ADRES:\s?(.*);ostatok:\s?([\d\s\.,]+)\s?(.{3});\s?([\d\s\.:]+).*]]></pattern>
-			<pattern comment="Попытка выделить остаток" action="UPDATE_BALANS" groups="CARD_NUMBER,BALANS,VALUT_ACCOUNT"><![CDATA[.*KARTA:\*(\d+).*ostatok:\s?([\d\s\.,]+)\s?(.{3}).*]]></pattern>
-			
-			<pattern comment="Пополнение карты" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT,DATE"><![CDATA[.*:\*(\d+)\s(.*?)\s.*\s([\d\s\.,]+)\s(.{3})\s;.*:\s([\d\s\.,]+)\s(.{3});\s([\d\s\.:]+).*]]></pattern>
-			<pattern comment="Начисление % по карте" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,CARD_NUMBER,SUMMA,VALUT_OPERATION"><![CDATA[.*,\sчто сумма\s(.*)\s\*(\d+)\s.*\sсоставила\s([\d\s\.,]+)\s(.{3}).*]]></pattern>
-			<pattern comment="Расход средств new" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,SUMMA,VALUT_OPERATION,CARD_NUMBER,MESTO,BALANS,VALUT_ACCOUNT,DATE"><![CDATA[(.*?)\s?([\d\s\.,]+)\s?(.{3})\s+;KARTA:\*(\d+);.*ADRES:\s?(.*);ostatok:\s([\d\.,]+)\s?(.{3});\s?([\d\s\.:]+).*]]></pattern>
-		</patterns>
+<bank id="114" caption="АйМаниБанк" serv_numbers="+79055996032,+79055996031,AENBANK,IMONEYBANK" exist_card_oper="true" exist_payees="false" min_pay_summa="0" max_pay_summa="0" icon="bank_altay" useSmsDate="true" format_dt="dd.MM.yy HH:mm" visible_key="false" key_hint="" number_hint="4 посл. цифры номера"><![CDATA[http://aenbank.ru/private/cards/sms/index.php?sphrase_id=564]]>
+        <card_operations>
+            <card_operation template="BAL*#CARD_NUMBER#" caption="Баланс (лимит доступных средств)"><![CDATA[file:///android_asset/html/banks/balans_info.html]]></card_operation>
+            <card_operation template="MS*#CARD_NUMBER#" caption="Мини-выписка по карте"></card_operation>
+            <card_operation template="BLOK*#CARD_NUMBER#" caption="Заблокировать карту"></card_operation>
+            <card_operation template="ACTIV*#CARD_NUMBER#" caption="Активировать карту"></card_operation>
+        </card_operations>
+        <patterns>
+            <types_operation>
+                <type caption="Пополнение карты" oper="+">popolnena</type>
+                <type caption="Начисление % по карте" oper="+">дохода по процентам выплаченная на счет карты</type>
+                
+                <type caption="Зачисление средств" oper="+">popolnen</type>
+                <type caption="Расход средств" oper="-">Avtorizatsiya</type>
+            </types_operation>
+            <!-- http://regexr.com?30df5 -->
+            <pattern comment="Зачисление средств" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT,DATE"><![CDATA[(.*?)\s?([\d\s\.,]+)\((.{3}).*dostupno:\s?([\d\s\.,]+)\s?(.{3});\s?([\d\s\.:]+)]]></pattern>
+            <pattern comment="Расход средств" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,SUMMA,VALUT_OPERATION,CARD_NUMBER,MESTO,BALANS,VALUT_ACCOUNT,
+DATE"><![CDATA[(.*?)\s?([\d\s\.,]+)\s?(.{3})\s+;KARTA:\*(\d+);.*ADRES:\s?(.*);dostupno:\s?([\d\s\.,]+)\s?(.{3});\s?([\d\s\.:]+).*]]></pattern>
+            <pattern comment="Попытка выделить остаток" action="UPDATE_BALANS" groups="CARD_NUMBER,BALANS,VALUT_ACCOUNT"><![CDATA[.*KARTA\*(\d+).*ostatok\s?([\d\s\.,]+)\s?(.{3})\s?([\d\s\.:]+).*]]></pattern>
+            
+            <pattern comment="Пополнение карты" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT,DATE"><![CDATA[.*:\*(\d+)\s(.*?)\s.*\s([\d\s\.,]+)\s(.{3})\s;.*:\s([\d\s\.,]+)\s(.{3});\s([\d\s\.:]+).*]]></pattern>
+            <pattern comment="Начисление % по карте" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,CARD_NUMBER,SUMMA,VALUT_OPERATION"><![CDATA[.*,\sчто сумма\s(.*)\s\*(\d+)\s.*\sсоставила\s([\d\s\.,]+)\s(.{3}).*]]></pattern>
+            <pattern comment="Расход средств new" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,SUMMA,VALUT_OPERATION,CARD_NUMBER,MESTO,BALANS,VALUT_ACCOUNT,
+DATE"><![CDATA[(.*?)\s?([\d\s\.,]+)\s?(.{3})\s+;KARTA:\*(\d+);.*ADRES:\s?(.*);dostupno:\s([\d\.,]+)\s?(.{3});\s?([\d\s\.:]+).*]]></pattern>
+        </patterns>
 	</bank>
 	<bank id="115" caption="Внешпромбанк" serv_numbers="VPB_CARD,2558" exist_card_oper="true" exist_payees="false" min_pay_summa="0" max_pay_summa="0" icon="bank_vpb" useSmsDate="false" format_dt="dd.MM.yyyy HH:mm" visible_key="true" key_hint="6 посл. цифры номера" number_hint="4 посл. цифры номера"><![CDATA[file:///android_asset/html/banks/info.html]]>
 		<card_types_codes>

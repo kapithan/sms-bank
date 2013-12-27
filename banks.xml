@@ -2630,7 +2630,7 @@
 			<pattern comment="Обновление баланса" action="UPDATE_BALANS" groups="BALANS,VALUT_ACCOUNT"><![CDATA[Balans\sscheta=(\d+)\s(.{3})]]></pattern>
 		</patterns>
 	</bank>
-	<bank id="92" caption="МДМ Банк" serv_numbers="6470,MDMBank,MDM Bank,SMS-INFO" exist_card_oper="true" exist_payees="true" min_pay_summa="0" max_pay_summa="0" icon="bank_mdm" format_dt="dd-MM HH:mm" visible_key="true" key_hint="3 посл. цифры карты" number_hint="4 посл. цифры карты"><![CDATA[http://www.mdm.ru/ufa/retail/distance/mdminfo/smsreq/]]>
+	<bank id="92" caption="МДМ Банк" serv_numbers="6470,MDMBank,MDM Bank,SMS-INFO" exist_card_oper="true" exist_payees="true" min_pay_summa="0" max_pay_summa="0" icon="bank_mdm" format_dt="dd.MM.yyyy HH:mm" visible_key="true" key_hint="3 посл. цифры карты" number_hint="4 посл. цифры карты"><![CDATA[http://www.mdm.ru/ufa/retail/distance/mdminfo/smsreq/]]>
 		<card_operations>
 			<card_operation template="КАРТА ОСТАТОК #KEY#" caption="Баланс (лимит доступных средств)"><![CDATA[file:///android_asset/html/banks/balans_info.html]]></card_operation>
 			<card_operation template="КАРТА ВЫПИСКА #KEY#" caption="Последние 5 операций"/>
@@ -2643,13 +2643,17 @@
 		</payees>
 		<patterns>
 			<types_operation>
-				<type caption="Оплата покупки" oper="-">Продажа</type>
+				<type caption="Оплата покупки" oper="-">Покупка</type>
 				<type caption="Отмена операции" oper="+">Отмена</type>
 				<type caption="Списание" oper="-">Списание</type>
+				<type caption="Выдача наличных" oper="-">Выдача наличных</type>
+				<type caption="Поступление" oper="+">Поступление</type>
+				
 			</types_operation>
 			<!-- http://regexr.com?31voc 29.08.2012 -->
-			<pattern comment="Движение средств" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,CARD_NUMBER,DATE,SUMMA,VALUT_OPERATION,BALANS,MESTO"><![CDATA[(.*)\s.(\d+)\s([\d\s\.:]+)\s-?([\d\s\.,]+)\s(.{3}).*Бал:\s([\d\s\.,]+)\s(.*)]]></pattern>
-			<pattern comment="Обновление баланса" action="UPDATE_BALANS" groups="CARD_NUMBER,BALANS,VALUT_ACCOUNT"><![CDATA[.*\s.(\d+)\s.*\s-?([\d\.]+)\s(.{3}).*]]></pattern>
+			<pattern comment="Движение средств с местом" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,CARD_NUMBER,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT,MESTO,DATE"><![CDATA[(.*?)\s+\*(\d+);.*?Сумма.*?([\d\.]+)\s+(\w{3});\sБаланс:\s([\d\.]+)\s(.{3});\s+(.*?);\s([\d\.\s:]+)]]></pattern>
+			<pattern comment="Движение средств без места" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,CARD_NUMBER,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT,DATE"><![CDATA[(.*?)\s+\*(\d+);.*?Сумма.*?([\d\.]+)\s+(\w{3});\sБаланс:\s([\d\.]+)\s(.{3});\s([\d\.\s:]+)]]></pattern>
+			<pattern comment="Обновление баланса" action="UPDATE_BALANS" groups="CARD_NUMBER,BALANS,VALUT_ACCOUNT"><![CDATA[.*\*(\d{3,4}).*Баланс:\s([\d\.]+)\s(.{3})]]></pattern>
 		</patterns>
 	</bank>
 	<bank id="93" caption="Ханты-Мансийский Банк" serv_numbers="KHMB" exist_card_oper="false" exist_payees="false" min_pay_summa="0" max_pay_summa="0" icon="bank_hmb" format_dt="yyyy-MM-dd HH:mm:ss" visible_key="true" key_hint="5 посл.цифр счета" number_hint="4 посл. цифры карты"><![CDATA[file:///android_asset/html/banks/info.html]]>

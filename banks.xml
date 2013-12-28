@@ -1027,10 +1027,10 @@
 			</types_operation>
 			<!-- http://regexr.com?2tjqs -->
 			<pattern comment="счет - с местом" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,MESTO,DATE,BALANS,VALUT_ACCOUNT"><![CDATA[.*[\d]{15}([\d]{5})\s+(.*?)\s+([\d\s,]+)\s+([a-zA-Z]{3})\.*\s+(.*)\.\s+На\s+([\d\.\s:]+).*остаток\s+([\d\s,]+)\s+([a-zA-Z]{3})]]></pattern>
-			<pattern comment="счет без места" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,MESTO,DATE,BALANS,VALUT_ACCOUNT"><![CDATA[.*[\d]{15}([\d]{5})\s+(.*?)\s+([\d\s,]+)\s+([a-zA-Z]{3})\.*\s+На\s+([\d\.\s:]+).*остаток\s+([\d\s,]+)\s+([a-zA-Z]{3})]]></pattern>
-			<pattern comment="Движение средств" action="INSERT_TO_JURNAL" groups="DATE,TYPE_OPERATION,KEY,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT"><![CDATA[([\d\.]+\s[\d:]+)\.\s(.*)\s\d+\*+(\d+)\..*\r.*:\s([\d\s\.,]+)\s(.{3}).*\r.*:\s([\d\s\.,]+)\s(.{3})]]></pattern>
+			<pattern comment="счет без места" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,DATE,BALANS,VALUT_ACCOUNT"><![CDATA[.*[\d]{15}([\d]{5})\s+(.*?)\s+([\d\s,]+)\s+([a-zA-Z]{3})\.*\s+На\s+([\d\.\s:]+).*остаток\s+([\d\s,]+)\s+([a-zA-Z]{3})]]></pattern>
+			<pattern comment="Движение средств" action="INSERT_TO_JURNAL" groups="DATE,TYPE_OPERATION,CARD_NUMBER,MESTO,SUMMA,VALUT_OPERATION"><![CDATA[([\d\.\s:]+).*\.\s+.*(покупка).*\s+\d+\*+(\d+)\s+в\s+(.*)Сумма:\s+([\d\s,]+)\s+([a-zA-Z]{3})]]></pattern>
 			<pattern comment="Снятие наличных" action="INSERT_TO_JURNAL" groups="DATE,TYPE_OPERATION,KEY,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT"><![CDATA[([\d\.]+\s[\d:]+)\.\s(.*)\s\d+\*+(\d+)\..*?:\s([\d\s\.,]+)\s(.{3}).*\r.*:\s([\d\s\.,]+)\s(.{3})]]></pattern>
-			<pattern comment="Отклонение операции" action="INSERT_TO_JURNAL" groups="DATE,KEY,TYPE_OPERATION,SUMMA,VALUT_OPERATION"><![CDATA[([\d\.]+\s[\d:]+).*\*+(\d+)\s(.*)\..*:\s([\d\s\.,]+)\s(.{3})]]></pattern>
+			<pattern comment="Отклонение операции" action="INSERT_TO_JURNAL" groups="DATE,KEY,TYPE_OPERATION,SUMMA,VALUT_OPERATION"><![CDATA[([\d\.\s:]+).*\..*\d+\*+(\d+)\s+(отклонена).*Сумма:\s+([\d\s,]+)\s+([a-zA-Z]{3})]]></pattern>
 		</patterns>
 	</bank>
 	<bank id="23" caption="Балтийский Банк" serv_numbers="+79210000921,BaltBank" exist_card_oper="true" exist_payees="false" min_pay_summa="0" max_pay_summa="0" icon="bank_baltiski" format_dt="dd-MM-yy HH:mm" visible_key="false" key_hint="Ключ.слово" number_hint="4 посл. цифры номера"><![CDATA[www.baltbank.ru/plastic-cards-sms.html]]>

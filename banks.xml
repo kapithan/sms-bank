@@ -1027,6 +1027,7 @@
 			</types_operation>
 			<!-- http://regexr.com?2tjqs -->
 			<pattern comment="счет - с местом" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,MESTO,DATE,BALANS,VALUT_ACCOUNT"><![CDATA[.*[\d]{16}([\d]{4})\s+(.*?)\s+([\d\s,]+)\s+([a-zA-Z]{3})\.*\s+(.*)\.\s+На\s+([\d\.\s:]+).*остаток\s+([\d\s,]+)\s+([a-zA-Z]{3})]]></pattern>
+			<pattern comment="без места" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,MESTO,DATE,BALANS,VALUT_ACCOUNT"><![CDATA[.*[\d]{16}([\d]{4})\s+(.*?)\s+([\d\s,]+)\s+([a-zA-Z]{3})\.*\s+На\s+([\d\.\s:]+).*остаток\s+([\d\s,]+)\s+([a-zA-Z]{3})]]></pattern>
 			<pattern comment="Движение средств" action="INSERT_TO_JURNAL" groups="DATE,TYPE_OPERATION,KEY,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT"><![CDATA[([\d\.]+\s[\d:]+)\.\s(.*)\s\d+\*+(\d+)\..*\r.*:\s([\d\s\.,]+)\s(.{3}).*\r.*:\s([\d\s\.,]+)\s(.{3})]]></pattern>
 			<pattern comment="Снятие наличных" action="INSERT_TO_JURNAL" groups="DATE,TYPE_OPERATION,KEY,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT"><![CDATA[([\d\.]+\s[\d:]+)\.\s(.*)\s\d+\*+(\d+)\..*?:\s([\d\s\.,]+)\s(.{3}).*\r.*:\s([\d\s\.,]+)\s(.{3})]]></pattern>
 			<pattern comment="Отклонение операции" action="INSERT_TO_JURNAL" groups="DATE,KEY,TYPE_OPERATION,SUMMA,VALUT_OPERATION"><![CDATA[([\d\.]+\s[\d:]+).*\*+(\d+)\s(.*)\..*:\s([\d\s\.,]+)\s(.{3})]]></pattern>

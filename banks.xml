@@ -1011,7 +1011,7 @@
 			<pattern comment="обновить баланс,если ничего не сработало" action="UPDATE_BALANS" groups="CARD_NUMBER,BALANS,VALUT_ACCOUNT"><![CDATA[.*\*(\d{6,}).*Остаток([0-9\.,\s-]+)(.{3}).*]]></pattern>
 		</patterns>
 	</bank> 
-	<bank id="22" caption="Банк24.ru" serv_numbers="Bank24.ru,0883" exist_card_oper="false" exist_payees="false" min_pay_summa="0" max_pay_summa="0" icon="bank_24ru" format_dt="dd.MM.yyyy HH:mm:ss;dd.MM.yyyy HH:mm;dd.MM..yyyy HH:mm:ss" useSmsDate="false" visible_key="true" key_hint="4 посл. цифры карты" number_hint="5 посл. цифры счета"><![CDATA[file:///android_asset/html/banks/bank24ru/info.html]]>
+	<bank id="22" caption="Банк24.ru" serv_numbers="Bank24.ru,0883" exist_card_oper="false" exist_payees="false" min_pay_summa="0" max_pay_summa="0" icon="bank_24ru" format_dt="dd.MM.yyyy HH:mm;dd.MM.yyyy HH:mm:ss" useSmsDate="false" visible_key="true" key_hint="4 посл. цифры карты" number_hint="5 посл. цифры счета"><![CDATA[file:///android_asset/html/banks/bank24ru/info.html]]>
 		<patterns>
 			<types_operation>
 				<type caption="Зачисление средств" oper="+">зачислено</type>

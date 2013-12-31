@@ -2657,7 +2657,7 @@
 			<pattern comment="Обновление баланса" action="UPDATE_BALANS" groups="CARD_NUMBER,BALANS,VALUT_ACCOUNT"><![CDATA[.*\*(\d{3,4}).*Баланс:\s([\d\.]+)\s(.{3})]]></pattern>
 		</patterns>
 	</bank>
-	<bank id="93" caption="Ханты-Мансийский Банк" serv_numbers="KHMB" exist_card_oper="false" exist_payees="false" min_pay_summa="0" max_pay_summa="0" icon="bank_hmb" format_dt="yyyy-MM-dd HH:mm:ss" visible_key="true" key_hint="5 посл.цифр счета" number_hint="4 посл. цифры карты"><![CDATA[file:///android_asset/html/banks/info.html]]>
+	<bank id="93" caption="Ханты-Мансийский Банк" serv_numbers="KHMB,KHMB.RU" exist_card_oper="false" exist_payees="false" min_pay_summa="0" max_pay_summa="0" icon="bank_hmb" format_dt="yyyy-MM-dd HH:mm:ss" visible_key="true" key_hint="5 посл.цифр счета" number_hint="4 посл. цифры карты"><![CDATA[file:///android_asset/html/banks/info.html]]>
 		<patterns>
 			<types_operation>
 				<type caption="Списание за SMS-информирование" oper="-">Uslugi informirovaniya</type>

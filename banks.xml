@@ -1648,7 +1648,7 @@
 			<pattern comment="Попытка выделить остаток" action="UPDATE_BALANS" groups="BALANS,VALUT_ACCOUNT"><![CDATA[.*\s([\d\.]+)\s?(.{3})\.$]]></pattern>
 		</patterns>
 	</bank>
-	<bank id="47" caption="ПриватБанк" serv_numbers="10060" exist_card_oper="true" exist_payees="false" min_pay_summa="0" max_pay_summa="0" icon="bank_privat" format_dt="HH:mm;dd.MM.yyyy HH:mm:ss" useSmsDate="true" visible_key="true" key_hint="4 посл. цифр карты" number_hint="2 посл. цифр карты"><![CDATA[file:///android_asset/html/banks/privat/info.html]]>
+	<bank id="47" caption="ПриватБанк" serv_numbers="10060,PrivatBank" exist_card_oper="true" exist_payees="false" min_pay_summa="0" max_pay_summa="0" icon="bank_privat" format_dt="HH:mm;dd.MM.yyyy HH:mm:ss;dd/MM/yy" useSmsDate="true" visible_key="true" key_hint="4 посл. цифр карты" number_hint="2 посл. цифр карты"><![CDATA[file:///android_asset/html/banks/privat/info.html]]>
 		<card_operations>
 			<card_operation template="#KEY#" caption="Баланс (лимит доступных средств)"><![CDATA[file:///android_asset/html/banks/privat/balans_info.html]]></card_operation>
 			<card_operation template="pay#SUMMA#+#KEY#" caption="Оплата телефона"/>
@@ -1656,21 +1656,22 @@
 		</card_operations>
 		<patterns>
 			<types_operation>
-				<type caption="Зачисление средств" oper="+">ZACHISLENIE</type>
+				<type caption="Зачисление средств" oper="+">Zachislenie</type>
 				<type caption="Зачисление средств" oper="+">POPOLNENIE</type>
-				<type caption="Оплата покупки" oper="-">OPLATA</type>
-				<type caption="Выдача наличных" oper="-">SNYATIE</type>
+				<type caption="Оплата покупки" oper="-">Oplata</type>
+				<type caption="Выдача наличных" oper="-">Snyatie</type>
 				<type caption="Списание средств" oper="?">SPISANIE</type>
 				<type caption="Отказ операции" oper="?">OTKA3</type>
 			</types_operation>
 			<!-- http://regexr.com?32akl 01.10.2012 -->
 			<pattern comment="Движение средств - новый тип" action="INSERT_TO_JURNAL" groups="DATE,CARD_NUMBER,BALANS,VALUT_ACCOUNT"><![CDATA[([\d\s\.:]+),.*?(\d+),.*?:\s([\d\s\.,]+)\s?(.{3}).*]]></pattern>
-			<pattern comment="Движение средств - с валютой" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,DATE,TYPE_OPERATION,SUMMA,VALUT_OPERATION,MESTO,BALANS,VALUT_ACCOUNT"><![CDATA[.*\*(\d+)\s([\d:]+)\s(.*)\s([\d\s\.,]+)(.{3})\s\((.*)\).*Bal:([\d\s\.,]+)([A-Z]{3})\..*]]></pattern>
+			<pattern comment="Движение средств - с валютой" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,DATE,TYPE_OPERATION,SUMMA,VALUT_OPERATION,MESTO,BALANS,VALUT_ACCOUNT"><![CDATA[.*\*(\d+)\s([\d:]+)\s(.*)\s([\d\s\.,]+)(.{3})\s\((.*)\).*Bal:([\d\s\.,]+)([A-Z]{3})\.*.*]]></pattern>
+			<pattern comment="Движение средств - без места" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,DATE,TYPE_OPERATION,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT"><![CDATA[.*\*(\d+)\s([\d:]+)\s(.*)\s([\d\s\.,]+)(.{3})\.\s+Bal:([\d\s\.,]+)([A-Z]{3})\.*.*]]></pattern>
 			<pattern comment="Движение средств - без валюты" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,DATE,TYPE_OPERATION,SUMMA,MESTO,BALANS"><![CDATA[.*\*(\d+)\s([\d:]+)\s(.*)\s([\d\s\.,]+).*\((.*)\).*Bal:([\d\s\.,]+)\..*]]></pattern>
-			<pattern comment="Зачисление средств" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,DATE,TYPE_OPERATION,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT"><![CDATA[.*\*(\d+)\s([\d:]+)\s(.*)\s([\d\s\.,]+)(.{3})\sBal:([\d\s\.,]+)(.{3}).*]]></pattern>
+			<pattern comment="Зачисление средств" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,DATE,TYPE_OPERATION,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT"><![CDATA[.*\*(\d+)\s([\d\/]+)\s+(.*?)\s([\d\s\.,]+)([A-Z]{3})\.\sBal:([\d\s\.,]+)(.{3}).*]]></pattern>
 			<pattern comment="Обновление баланса" action="INSERT_TO_JURNAL" groups="DATE,KEY,BALANS,VALUT_ACCOUNT"><![CDATA[.*\*(\d+)\s([\d:]+)\s.*\s([\d\s\.,]+)(.{3})\s\((.*)\)\.\s(.*):.*]]></pattern>
 			<pattern comment="Обновление баланса" action="UPDATE_BALANS" groups="BALANS,VALUT_ACCOUNT"><![CDATA[.*Balance:\s([\d\s\.,]+)\s(.{3}).*]]></pattern>
-			<pattern comment="Попытка выделить остаток" action="UPDATE_BALANS" groups="KEY,BALANS,VALUT_ACCOUNT"><![CDATA[.*\*(\d+).*Bal:([\d\s\.,]+)\..*]]></pattern>
+			<pattern comment="Попытка выделить остаток" action="UPDATE_BALANS" groups="KEY,BALANS,VALUT_ACCOUNT"><![CDATA[.*\*(\d+).*Bal:([\d\s\.]+)([A-Z]{3}).*]]></pattern>
 		</patterns>
 	</bank>
 	<bank id="48" caption="РоссельхозБанк" serv_numbers="+79037976020,RSHB" exist_card_oper="true" exist_payees="false" min_pay_summa="0" max_pay_summa="0" icon="bank_rsb" format_dt="dd/MM HH:mm;dd/MM HH:mm:ss" useSmsDate="false" visible_key="true" key_hint="4 посл. цифр счета" number_hint="4 посл. цифр карты"><![CDATA[file:///android_asset/html/banks/rsb/info.html]]>

@@ -1916,15 +1916,16 @@
 			<pattern comment="Отмена операции" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,DATE,CARD_NUMBER,SUMMA,VALUT_OPERATION,MESTO,BALANS,VALUT_ACCOUNT"><![CDATA[(.*?)\s\/\s([\d:]+\s[\d\.]+)\s\/\s.*\*(\d+)\s\/\s(.*?)([\d\.,]+)\s(.{3})\s\/\s(.*?)\s\/\sOCTATOK\s([\d\.,]+)\s(.{3}).*]]></pattern>
 		</patterns>
 	</bank>
-	<bank id="60" caption="Альфа-Банк Украина" serv_numbers="AlfaBank" exist_card_oper="false" exist_payees="false" min_pay_summa="0" max_pay_summa="0" icon="bank_alfa" format_dt="dd/MM HH:mm;dd.MM.yyyy HH:mm" visible_key="false" key_hint="" number_hint="4 посл. цифр карты"><![CDATA[file:///android_asset/html/banks/alfa/info.html]]>
+	<bank id="60" caption="Альфа-Банк Украина" serv_numbers="AlfaBank" exist_card_oper="false" exist_payees="false" min_pay_summa="0" max_pay_summa="0" icon="bank_alfa" format_dt="dd/MM HH:mm;dd.MM HH:mm" visible_key="false" key_hint="" number_hint="4 посл. цифр карты"><![CDATA[file:///android_asset/html/banks/alfa/info.html]]>
 		<patterns>
 			<types_operation>
-				<type caption="Зачисление средств" oper="+">POPOVNENNYA</type>
-				<type caption="Списание средств" oper="-">SPYSANNYA</type>
+				<type caption="Зачисление средств" oper="+">popovnennya</type>
+				<type caption="Списание средств" oper="-">uspishna operaciya</type>
 			</types_operation>
 			<!-- http://regexr.com?2tj3e -->
-			<pattern comment="Списание средств" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,SUMMA,VALUT_OPERATION,DATE,BALANS,VALUT_ACCOUNT,TYPE_OPERATION,MESTO"><![CDATA[.*-(\d+)\s(\d+)\s(.{3})\s([\d\/\.]+\s[\d:]+)\s\w+:\s([\d\.]+)\s(.{3})\s(\w+)\s\w+\s(.*)]]></pattern>
-			<pattern comment="Зачисление средств" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,SUMMA,VALUT_OPERATION,DATE,BALANS,VALUT_ACCOUNT,TYPE_OPERATION"><![CDATA[.*-(\d+)\s(\d+)\s(.{3})\s([\d\/\.]+\s[\d:]+)\s.*\s\w+:\s([\d\.]+)\s(.{3})\s(.*)]]></pattern>
+			<pattern comment="Списание средств" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,DATE,MESTO,BALANS,VALUT_ACCOUNT"><![CDATA[.*-(\d+)\s+(.*?)\s+([\d\.\,]+)([A-Za-z]{3})\s+(\d{2}[\.\/]+\d{2}\s\d{2}\:\d{2})\s+(.*?)\s+Dostupno\:([\d\.]+)([A-Za-z]{3})]]></pattern>
+			<pattern comment="Зачисление средств" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,DATE,BALANS,VALUT_ACCOUNT"><![CDATA[.*-(\d+)\s+(.*?)\s+([\d\.\,]+)([A-Za-z]{3})\s+(\d{2}[\.\/]+\d{2}\s\d{2}\:\d{2})\s+Dostupno\:([\d\.]+)([A-Za-z]{3})]]></pattern>
+			<pattern comment="Обновление баланса" action="UPDATE_BALANS" groups="BALANS,VALUT_ACCOUNT"><![CDATA[.*Dostupno:([\d\.]+)([A-Za-z]{3})]]></pattern>
 		</patterns>
 	</bank>
 	<bank id="61" caption="QIWI" serv_numbers="7494,QIWI,QIWI Wallet,QIWIWallet,QIWI BANK" exist_card_oper="true" exist_payees="true" min_pay_summa="0" max_pay_summa="0" icon="bank_qiwi" icon_big="bank_qiwi_big" useSmsDate="true" format_dt="dd.MM.yyyy HH:mm:ss" visible_key="false" key_hint="" number_hint="4 посл. цифр карты"><![CDATA[file:///android_asset/html/banks/qiwi/info.html]]>

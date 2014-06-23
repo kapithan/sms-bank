@@ -1188,7 +1188,7 @@
 			<pattern comment="Комиссия" action="INSERT_TO_JURNAL" groups="DATE,CARD_NUMBER,MESTO,TYPE_OPERATION,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT"><![CDATA[(\d{2}:\d{2}\s+\d{2}\.\d{2}\.\d{2}).\s+(\d{6}\*\d{4})\.\s+(Sozdanie virtual'noj Internet-karty\s+(\d+(?:.\d{2}){0,1})\s+.{3})\.\s+(Komissija)\s+(\d+(?:.\d{2}){0,1})\s+(.{3})\.\s+Ostatok\s+(\d+(?:.\d{2}){0,1})\s+(.{3})\.]]></pattern>
 		</patterns>
 	</bank>
-	<bank id="29" caption="Абсолют Банк" serv_numbers="+79037976106" exist_card_oper="true" exist_payees="false" min_pay_summa="0" max_pay_summa="0" icon="bank_absolut" format_dt="HH-mm dd.MM.yyyy" number_hint="5 посл. цифр номера" visible_key="true" key_hint="8 посл. цифр номера"><![CDATA[file:///android_asset/html/banks/absolut/info.html]]>
+	<bank id="29" caption="Абсолют Банк" serv_numbers="+79037976106" exist_card_oper="true" exist_payees="false" min_pay_summa="0" max_pay_summa="0" icon="bank_absolut" format_dt="HH-mm dd.MM.yyyy" number_hint="4 первых цифр номера" visible_key="true" key_hint="6 первых. цифр договора"><![CDATA[file:///android_asset/html/banks/absolut/info.html]]>
 		<card_operations>
 			<card_operation template="BAL #CARD_NUMBER#" caption="Баланс (лимит доступных средств)"/>
 			<card_operation template="STM #CARD_NUMBER#" caption="Мини-выписка"/>
@@ -1197,11 +1197,13 @@
 		<patterns>
 			<types_operation>
 				<type caption="Зачисление средств" oper="+">ZACHISLENO</type>
+				<type caption="Зачисление средств" oper="+">PROVEDENA OPERACIYA</type>
 				<type caption="Произведен перевод с карты" oper="-">PROIZVEDEN PEREVOD S KARTY</type>
 				<type caption="Списание средств" oper="-">SPISANO</type>
 			</types_operation>
 			<!-- http://regexr.com?2ugcc -->
 			<pattern comment="Списание" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,SUMMA,VALUT_OPERATION,MESTO,BALANS,VALUT_ACCOUNT,CARD_NUMBER,DATE"><![CDATA[\w+;\s+(.*):\s+([\d\s\.]+)\s+(\w{3});\sMESTO:\s(.*);\sBALANS:\s([\d\s\.]+)\s(\w{3}).*?(\d{4}).*?;\s(\d{2}-\d{2}\s[\d\.]+)]]></pattern>
+			<pattern comment="Зачисление" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT,KEY,DATE"><![CDATA[.*?;*\s*(.*?)\s(\d[\d\s]+\.\d{2})\s(\w{3});\sBALANS:\s([\d\s\.]+)\s(\w{3});\sDOGOVOR:\s(\d+).*?;\s(\d{2}-\d{2}\s[\d\.]+).*]]></pattern>
 			<pattern comment="Движение средств - без места" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT,CARD_NUMBER,DATE"><![CDATA[\w+;\s(.*?):\s([\d\s\.]+)\s(\D{3});\s\w+:\s([\d\s\.]+)\s(\D{3});.*x(\d+);\s([\d-]+\s[\d\.]+).*]]></pattern>
 			<pattern comment="Попытка выделить остаток" action="UPDATE_BALANS" groups="CARD_NUMBER,BALANS,VALUT_ACCOUNT"><![CDATA[.*x(\d+);.*:\s([\d\s\.]+)\s(\D{3});.*]]></pattern>
 			<pattern comment="Попытка выделить остаток" action="UPDATE_BALANS" groups="BALANS,VALUT_ACCOUNT,CARD_NUMBER"><![CDATA[.*:\s([\d\s\.]+)\s(\D{3});.*x(\d+);.*]]></pattern>

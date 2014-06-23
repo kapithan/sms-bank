@@ -1202,7 +1202,7 @@
 				<type caption="Списание средств" oper="-">SPISANO</type>
 			</types_operation>
 			<!-- http://regexr.com?2ugcc -->
-			<pattern comment="Списание" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,SUMMA,VALUT_OPERATION,MESTO,BALANS,VALUT_ACCOUNT,CARD_NUMBER,DATE"><![CDATA[\w+;\s+(.*):\s+([\d\s\.]+)\s+(\w{3});\sMESTO:\s(.*);\sBALANS:\s([\d\s\.]+)\s(\w{3}).*?(\d{4}).*?;\s(\d{2}-\d{2}\s[\d\.]+)]]></pattern>
+			<pattern comment="Списание" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,SUMMA,VALUT_OPERATION,MESTO,BALANS,VALUT_ACCOUNT,CARD_NUMBER,DATE"><![CDATA[\w+;\s+(.*):\s+([\d\s\.]+)\s+(\w{3});\sMESTO:\s(.*);\sBALANS:\s([\d\s\.]+)\s(\w{3}).*?\d+.*(\d{4}).*?;\s(\d{2}-\d{2}\s[\d\.]+)]]></pattern>
 			<pattern comment="Зачисление" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT,KEY,DATE"><![CDATA[.*?;*\s*(.*?)\s(\d[\d\s]+\.\d{2})\s(\w{3});\sBALANS:\s([\d\s\.]+)\s(\w{3});\sDOGOVOR:\s(\d+).*?;\s(\d{2}-\d{2}\s[\d\.]+).*]]></pattern>
 			<pattern comment="Движение средств - без места" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT,CARD_NUMBER,DATE"><![CDATA[\w+;\s(.*?):\s([\d\s\.]+)\s(\D{3});\s\w+:\s([\d\s\.]+)\s(\D{3});.*x(\d+);\s([\d-]+\s[\d\.]+).*]]></pattern>
 			<pattern comment="Попытка выделить остаток" action="UPDATE_BALANS" groups="CARD_NUMBER,BALANS,VALUT_ACCOUNT"><![CDATA[.*x(\d+);.*:\s([\d\s\.]+)\s(\D{3});.*]]></pattern>

@@ -3191,7 +3191,10 @@ DATE"><![CDATA[(.*?)\s?([\d\s\.,]+)\s?(.{3})\s+;KARTA:\*(\d+);.*ADRES:\s?(.*);do
 			</types_operation>
 			<!-- http://regexr.com?311sg 23.05.12 -->
 			<pattern comment="Движение средств" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,SUMMA,VALUT_OPERATION,CARD_NUMBER,MESTO,DATE,BALANS,VALUT_ACCOUNT"><![CDATA[(.)([\d\.]+)\s(.{3}).*?\.+(\d+)\s\-\s(.*?)\s\-\s([\d\s:\/]+)\s\-\sBalans\s([\d\.]+)\s(.{3})]]></pattern>
+			<pattern comment="Пополнение без места" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,SUMMA,VALUT_OPERATION,CARD_NUMBER,DATE,BALANS,VALUT_ACCOUNT"><![CDATA[(.)([\d\.]+)\s(.{3}).*?\.+(\d+)\s\-\s([\d\s:\/]+)\s\-\sBalans\s([\d\.]+)\s(.{3})]]></pattern>
 			<pattern comment="Отклонение операции" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,SUMMA,VALUT_OPERATION,CARD_NUMBER,MESTO,DATE"><![CDATA[(.*?)\s([-+\d\.]+)\s(.{3}).*?\.+(\d+)\s\-\s(.*?)\s\-\s([\d\s:\/]+)]]></pattern>
+			<pattern comment="Попытка выделить остаток" action="UPDATE_BALANS" groups="CARD_NUMBER,BALANS,VALUT_ACCOUNT"><![CDATA[Balans\spo.*?(\d{4}):\s([\d\.]+)\s(\w{3})]]></pattern>
+			<pattern comment="Попытка выделить остаток2" action="UPDATE_BALANS" groups="BALANS,VALUT_ACCOUNT"><![CDATA[.*?Balans\s([\d\.]+)\s(\w{3})]]></pattern>
 		</patterns>
 	</bank>
 	<bank id="118" caption="БПС-Сбербанк" serv_numbers="1222,1209,1223" exist_card_oper="true" exist_payees="true" min_pay_summa="0" max_pay_summa="0" icon="bank_sber" useSmsDate="false" format_dt="dd.MM.yyyy HH:mm:ss" visible_key="true" key_hint="Пароль" number_hint="4 посл. цифры номера"><![CDATA[file:///android_asset/html/banks/bpsb/info.html]]>

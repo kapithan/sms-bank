@@ -3490,7 +3490,8 @@ DATE"><![CDATA[(.*?)\s?([\d\s\.,]+)\s?(.{3})\s+;KARTA:\*(\d+);.*ADRES:\s?(.*);do
 			<types_operation>
 				<type caption="Оплата покупки" oper="-">покупка</type>
 				<type caption="хуйня какая то предавторизация" oper="-">предавторизация</type>
-				<type caption="Списание средств" oper="-">снято</type>				
+				<type caption="Списание средств" oper="-">снято</type>
+				<type caption="Зачисление" oper="+">увел.баланса</type>					
 				<type caption="Ошибка операции" oper="?">отказ</type>
 			</types_operation>
 			<pattern comment="покупка, снятие" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,DATE,MESTO"><![CDATA[(\d{4})\s([пс].*?)\s(\d[\d\s\.]+\d+)\s*([A-Za-zА-Яа-я]{3})\s([\d\.]+\s+\d{2}:\d{2})\s+(.*)]]></pattern>

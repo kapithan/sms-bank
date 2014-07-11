@@ -3485,6 +3485,20 @@ DATE"><![CDATA[(.*?)\s?([\d\s\.,]+)\s?(.{3})\s+;KARTA:\*(\d+);.*ADRES:\s?(.*);do
 			<pattern comment="Пополнение без лимита" action="INSERT_TO_JURNAL" groups="DATE,CARD_NUMBER,TYPE_OPERATION,VALUT_OPERATION,SUMMA"><![CDATA[([\d\.\s:]+)\s\s.*\-(\d+)\s\s(POPOLNENYE\sSCHETA)\s(.{3})\s([\d\.,-]+)\s\s.*]]></pattern>
 		</patterns>
 	</bank>
+		<bank id="125" caption="Меткомбанк" serv_numbers="METKOMBANK" exist_card_oper="false" exist_payees="false" min_pay_summa="0" max_pay_summa="0" icon="bank_promsb" format_dt="dd-MM-yyyy HH:mm;dd-MM-yyyy HH:mm:ss" visible_key="true" key_hint="4 посл. цифр счета" number_hint="4 посл. цифр карты"><![CDATA[file:///android_asset/html/banks/promsb/info.html]]>
+		<patterns>
+			<types_operation>
+				<type caption="Оплата покупки" oper="-">покупка</type>
+				<type caption="хуйня какая то предавторизация" oper="-">предавторизация</type>
+				<type caption="Списание средств" oper="-">снято</type>				
+				<type caption="Ошибка операции" oper="?">отказ</type>
+			</types_operation>
+			<pattern comment="покупка, снятие" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,DATE,MESTO"><![CDATA[(\d{4})\s([пс].*?)\s(\d[\d\s\.]+\d+)\s*([A-Za-zА-Яа-я]{3})\s([\d\.]+\s+\d{2}:\d{2})\s+(.*)]]></pattern>
+			<pattern comment="Информация о балансе" action="INSERT_TO_JURNAL" groups="BALANS,VALUT_ACCOUNT"><![CDATA[Итого.*?([\d\.]+\d+)\s+([А-Яа-яA-Za-z]{3})]]></pattern>
+			<pattern comment="Зачисление - кириллица" action="INSERT_TO_JURNAL" groups="DATE,TYPE_OPERATION,SUMMA,VALUT_OPERATION"><![CDATA[^([\d\d\.]+\s[\d:]+)\s(.*?)\s(\d[\d\s\.]+\d)\s+([A-zА-Я]+).*]]></pattern>
+			<pattern comment="отказ" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,KEY,DATE,SUMMA,VALUT_OPERATION,MESTO"><![CDATA[(\d{4})\s(отказ.*?)\s(\d[\d\s\.]+\d+)\s*([A-Za-zА-Яа-я]{3})\s([\d\.]+\s+\d{2}:\d{2})\s+(.*)]]></pattern>
+		</patterns>
+	</bank>
 </banks>
 	
 	

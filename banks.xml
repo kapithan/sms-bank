@@ -3494,7 +3494,7 @@ DATE"><![CDATA[(.*?)\s?([\d\s\.,]+)\s?(.{3})\s+;KARTA:\*(\d+);.*ADRES:\s?(.*);do
 				<type caption="Ошибка операции" oper="?">отказ</type>
 			</types_operation>
 			<pattern comment="покупка, снятие" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,DATE,MESTO"><![CDATA[(\d{4})\s([пс].*?)\s(\d[\d\s\.]+\d+)\s*([A-Za-zА-Яа-я]{3})\s([\d\.]+\s+\d{2}:\d{2})\s+(.*)]]></pattern>
-			<pattern comment="Информация о балансе" action="INSERT_TO_JURNAL" groups="BALANS,VALUT_ACCOUNT"><![CDATA[Итого.*?([\d\.]+\d+)\s+([А-Яа-яA-Za-z]{3})]]></pattern>
+			<pattern comment="Информация о балансе" action="UPDATE_BALANS" groups="BALANS,VALUT_ACCOUNT"><![CDATA[Итого.*?([\d\.]+\d+)\s+([А-Яа-яA-Za-z]{3})]]></pattern>
 			<pattern comment="Зачисление - кириллица" action="INSERT_TO_JURNAL" groups="DATE,TYPE_OPERATION,SUMMA,VALUT_OPERATION"><![CDATA[^([\d\d\.]+\s[\d:]+)\s(.*?)\s(\d[\d\s\.]+\d)\s+([A-zА-Я]+).*]]></pattern>
 			<pattern comment="отказ" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,KEY,DATE,SUMMA,VALUT_OPERATION,MESTO"><![CDATA[(\d{4})\s(отказ.*?)\s(\d[\d\s\.]+\d+)\s*([A-Za-zА-Яа-я]{3})\s([\d\.]+\s+\d{2}:\d{2})\s+(.*)]]></pattern>
 		</patterns>

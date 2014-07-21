@@ -1015,6 +1015,7 @@
 	<bank id="22" caption="Банк24.ru" serv_numbers="Bank24.ru,0883" exist_card_oper="false" exist_payees="false" min_pay_summa="0" max_pay_summa="0" icon="bank_24ru" format_dt="dd.MM.yyyy HH:mm;dd.MM.yyyy HH:mm:ss" useSmsDate="false" visible_key="true" key_hint="4 посл. цифры карты" number_hint="5 посл. цифры счета"><![CDATA[file:///android_asset/html/banks/bank24ru/info.html]]>
 		<patterns>
 			<types_operation>
+				<type caption="Зачисление средств" oper="+">Пополнен</type>
 				<type caption="Зачисление средств" oper="+">зачислено</type>
 				<type caption="Зачисление средств" oper="+">zachisleno</type>
 				<type caption="Списание средств" oper="-">списано</type>
@@ -1027,11 +1028,14 @@
 				<type caption="Отклонение операции" oper="?">otklonena</type>
 			</types_operation>
 			<!-- http://regexr.com?2tjqs -->
-			<pattern comment="счет - с местом" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,MESTO,DATE,BALANS,VALUT_ACCOUNT"><![CDATA[.*[\d]{15}([\d]{5})\s+(.*?)\s+([\d\s,]+)\s+([a-zA-Z]{3})\.*\s+(.*)\.\s+На\s+([\d\.\s:]+).*остаток\s+([\d\s,]+)\s+([a-zA-Z]{3})]]></pattern>
-			<pattern comment="счет без места" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,DATE,BALANS,VALUT_ACCOUNT"><![CDATA[.*[\d]{15}([\d]{5})\s+(.*?)\s+([\d\s,]+)\s+([a-zA-Z]{3})\.*\s+На\s+([\d\.\s:]+).*остаток\s+([\d\s,]+)\s+([a-zA-Z]{3})]]></pattern>
-			<pattern comment="Движение средств" action="INSERT_TO_JURNAL" groups="DATE,TYPE_OPERATION,CARD_NUMBER,MESTO,SUMMA,VALUT_OPERATION"><![CDATA[([\d\.\s:]+).*\.\s+.*(покупка).*\s+\d+\*+(\d+)\s+в\s+(.*)Сумма:\s+([\d\s,]+)\s+([a-zA-Z]{3})]]></pattern>
+			<pattern comment="счет - списание" action="INSERT_TO_JURNAL" groups="DATE,CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,MESTO,BALANS,VALUT_ACCOUNT"><![CDATA[(\d[\d\s\.:]+).*?\d{15}(\d{5})[;:]*\s+(.*?)\s+(\d[\d\s,]+)\s+([a-zA-Z]{3})\.\sПолучатель\s(.*?),\s+остаток\s+(\d[\d\s,]+)\s+([a-zA-Z]{3})]]></pattern>
+			<pattern comment="счет - зачисление" action="INSERT_TO_JURNAL" groups="DATE,CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,MESTO,BALANS,VALUT_ACCOUNT"><![CDATA[(\d[\d\s\.:]+).*?\d{15}(\d{5})[;:]*\s+(.*?)\s+(\d[\d\s,]+)\s+([a-zA-Z]{3})\sот\s(.*?),\s+остаток\s+(\d[\d\s,]+)\s+([a-zA-Z]{3})]]></pattern>
+			<pattern comment="карта - покупка" action="INSERT_TO_JURNAL" groups="DATE,TYPE_OPERATION,CARD_NUMBER,MESTO,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT"><![CDATA[(\d[\d\s\.:]+).*?\s+(.*?)\s\*(\d+)\sв\s(.*?),.*?(\d[\d,]+)\s([a-zA-Z]{3}).*?(\d[\d\s,]+)\s([a-zA-Z]{3})]]></pattern>
 			<pattern comment="Снятие наличных" action="INSERT_TO_JURNAL" groups="DATE,TYPE_OPERATION,KEY,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT"><![CDATA[([\d\.]+\s[\d:]+)\.\s(.*)\s\d+\*+(\d+)\..*?:\s([\d\s\.,]+)\s(.{3}).*\r.*:\s([\d\s\.,]+)\s(.{3})]]></pattern>
+			<pattern comment="карта - пополнение" action="INSERT_TO_JURNAL" groups="DATE,TYPE_OPERATION,CARD_NUMBER,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT"><![CDATA[(\d[\d\s\.:]+).*?\s+(.*?)\s\*(\d+):\s+(\d[\d\s,]+)\s+([a-zA-Z]{3}).*?(\d[\d\s,]+)\s([a-zA-Z]{3})]]></pattern>
 			<pattern comment="Отклонение операции" action="INSERT_TO_JURNAL" groups="DATE,KEY,TYPE_OPERATION,SUMMA,VALUT_OPERATION"><![CDATA[([\d\.\s:]+).*\..*\d+\*+(\d+)\s+(отклонена).*Сумма:\s+([\d\s,]+)\s+([a-zA-Z]{3})]]></pattern>
+			<pattern comment="счет - остаток" action="UPDATE_BALANS" groups="CARD_NUMBER,BALANS,VALUT_ACCOUNT"><![CDATA[.*?\d{15}(\d{5}).*остаток\s+(\d[\d\s,]+)\s+([a-zA-Z]{3})]]></pattern>
+			<pattern comment="карта - остаток" action="UPDATE_BALANS" groups="CARD_NUMBER,BALANS,VALUT_ACCOUNT"><![CDATA[.*\*(\d+).*Остаток:\s(\d[\d\s,]+)\s([a-zA-Z]{3})]]></pattern>
 		</patterns>
 	</bank>
 	<bank id="23" caption="Балтийский Банк" serv_numbers="+79210000921,BaltBank" exist_card_oper="true" exist_payees="false" min_pay_summa="0" max_pay_summa="0" icon="bank_baltiski" format_dt="dd-MM-yy HH:mm" visible_key="false" key_hint="Ключ.слово" number_hint="4 посл. цифры номера"><![CDATA[www.baltbank.ru/plastic-cards-sms.html]]>

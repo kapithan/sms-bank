@@ -1848,13 +1848,14 @@
 				<type caption="Отмена покупки" oper="+">Отмена покупка</type>
 				<type caption="Оплата покупки" oper="-">Платеж</type>
 				<type caption="Оплата покупки" oper="-">Покупка</type>
+				<type caption="Оплата покупки" oper="-">Pokupka</type>
 				<type caption="Зачисление средств" oper="+">Пополнение</type>
 			</types_operation>
 			<!-- http://regexr.com?32c5p 05.10.2012 -->
-			<pattern comment="Покупка new" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT,MESTO,DATE"><![CDATA[\*(\d+);\s(.*):\s([\d\.,]+)\s?(.{1,3})\.?;\s.*:\s([\d\.,]+)\s?(.{1,3})\.;\s(.*);.*]]></pattern>
-			<pattern comment="Пополнение и платеж new" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT,DATE"><![CDATA[\*(\d+);\s(.*):\s([\d\.,]+)\s?(.{1,3})\.;\s.*:\s([\d\.,]+)\s?(.{1,3})\.;.*]]></pattern>
-			<pattern comment="Покупка" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT,MESTO,DATE"><![CDATA[\*(\d+);\s(.*):\s([\d\s\.,]+)\s?(.{1,3})\.?;\s.*:\s([\d\s\.,]+)\s?(.{1,3})\.;\s(.*);\s([\d\s\.:]+)]]></pattern>
-			<pattern comment="Пополнение и платеж" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT,DATE"><![CDATA[\*(\d+);\s(.*):\s([\d\s\.,]+)\s?(.{1,3})\.;\s.*:\s([\d\s\.,]+)\s?(.{1,3})\.;\s([\d\s\.:]+)]]></pattern>
+			<pattern comment="Покупка new" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT,MESTO,DATE"><![CDATA[\*?(\d{4});\s+(.*?):\s?(\d[\d\.,]+)\s?([a-zA-Zа-яА-Я]{1,3})\.?;.*?:\s?(\d[\d\.,]+)\s?([a-zA-Zа-яА-Я]{1,3})\.?;\s(.*?);\s(\d[\d\.]+\s[\d:]+).*]]></pattern>
+			<pattern comment="Пополнение и платеж new" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT,DATE"><![CDATA[\*(\d+);\s(.*):\s([\d\.,]+)\s?(.{1,3})\.;\s.*:\s([\d\.,]+)\s?(.{1,3})\.;\s(\d[\d\.]+\s[\d:]+)]]></pattern>
+			<!--<pattern comment="Покупка" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT,MESTO,DATE"><![CDATA[\*(\d+);\s(.*):\s([\d\s\.,]+)\s?(.{1,3})\.?;\s.*:\s([\d\s\.,]+)\s?(.{1,3})\.;\s(.*);\s([\d\s\.:]+)]]></pattern>-->
+			<!--<pattern comment="Пополнение и платеж" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT,DATE"><![CDATA[\*(\d+);\s(.*):\s([\d\s\.,]+)\s?(.{1,3})\.;\s.*:\s([\d\s\.,]+)\s?(.{1,3})\.;\s([\d\s\.:]+)]]></pattern>-->
 			<pattern comment="Попытка выделить остаток" action="UPDATE_BALANS" groups="CARD_NUMBER,BALANS,VALUT_ACCOUNT"><![CDATA[\*(\d+).*:\s([\d\s\.,]+)\s(.{1,3})\..*]]></pattern>
 		</patterns>
 	</bank>

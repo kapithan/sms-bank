@@ -163,9 +163,11 @@
 		<patterns>
 			<types_operation>
 				<type caption="Отказ в операции" oper="?">не выполнена</type> <!-- чтобы правильно распознавался отказ в опреации его нужно обязательно помещать перед оплатой услуг -->
+				<type caption="Оплата услуги МБ" oper="-">оплата Мобильного банка</type>
 				<type caption="Оплата услуги МБ" oper="-">мобильный банк</type>
 				<type caption="Оплата за выписку" oper="-">оплата за выписку/запрос баланса</type>
 				<type caption="Оплата покупки" oper="-">покупка</type>
+				<type caption="Поправка по счету" oper="?">поправка по счету</type>
 				<type caption="Поправка суммы" oper="-">поправка</type>
 				<type caption="Выдача наличных" oper="-">выдача наличных</type>
 				<type caption="Зачисление средств" oper="+">операция зачисления</type>
@@ -232,13 +234,17 @@
 				<type caption="отмена перевода средств на карту" oper="+">Otmena perevoda sredstv na karty</type>
 				<type caption="списание" oper="-">Spisanie</type>
 			</types_operation>
-			<pattern comment="Отказ в оплате услуг" action="INSERT_TO_JURNAL" groups="CARD_TYPE,CARD_NUMBER,DATE,SUMMA,VALUT_OPERATION,MESTO,TYPE_OPERATION"><![CDATA[(\D{4})(\d+):\s([\d\.]+\s[\d:]+)\s.*на сумму\s([\d\.]+)\s(.{3}).\s(.*)\s(не выполнена).*]]></pattern>
+			<pattern comment="Отказ в оплате услуг" action="INSERT_TO_JURNAL" groups="CARD_TYPE,CARD_NUMBER,DATE,SUMMA,VALUT_OPERATION,MESTO,TYPE_OPERATION"><![CDATA[(\D+)(\d+):\s([\d\s\.:]*\d)\s.*?\sна сумму\s([\d\s\.,]*\d)\s?([а-яА-яa-zA-Z]*)\.?\s*(.*?)\.?\s(не выполнена).*]]></pattern>
 			<!-- http://regexr.com?322c6 06.09.2012 -->
 			<pattern comment="Ответ на запрос блокировки карты, предложить отправить код подтверждения" action="REPLY_SMS" reply_number="+79262000900" groups="REPLY_CODE"><![CDATA[.*blokirov.*SMS:\s(\d{6})]]><![CDATA[html/banks/sberbank/reply_template_blockcard.html]]></pattern>
-			<pattern comment="Подтверждение на оплату по запросу (например, коммунальные платежи) - отправить сообщение в неизменном виде" action="REPLY_SMS" reply_number="+79262000900" groups="REPLY_CODE"><![CDATA[.*(\#\d+).*]]><![CDATA[html/banks/sberbank/reply_template_pay.html]]></pattern>
-			<pattern comment="Новый общий шаблон - кириллица" action="INSERT_TO_JURNAL" groups="CARD_TYPE,CARD_NUMBER,DATE,TYPE_OPERATION,SUMMA,VALUT_OPERATION,MESTO,BALANS,VALUT_ACCOUNT"><![CDATA[(\D{4})(\d+):\s([\d\s\.:]+)\s(.*?)\s([\d\s\.,]+)\s?(.{3})\.?\s(.*)выполнена.*?:\s?([\d\s\.,]+)\s?(.{3}).*]]></pattern>
-			<pattern comment="Новый общий шаблон - кириллица 2" action="INSERT_TO_JURNAL" groups="CARD_TYPE,CARD_NUMBER,DATE,TYPE_OPERATION,SUMMA,VALUT_OPERATION,MESTO,BALANS,VALUT_ACCOUNT"><![CDATA[(\D{4})(\d+):\s([\d\s\.:]+)\s(.*?)\s([\d\s\.,]+)\s?(.{1})\.?\s(.*).*?\s+Баланс:\s+([\d\s\.,]+)\s?(.{1}).*]]></pattern>
-			<pattern comment="Новый общий шаблон - кириллица - без остатка" action="INSERT_TO_JURNAL" groups="CARD_TYPE,CARD_NUMBER,DATE,TYPE_OPERATION,SUMMA,VALUT_OPERATION,MESTO"><![CDATA[(\D{4})(\d+):\s([\d\s\.:]+)\s(.*?)\s([\d\s\.,]+)\s?(.{3})\.?\s(.*)выполнена.*]]></pattern>
+			<pattern comment="Подтверждение на оплату по запросу (например, коммунальные платежи)" action="REPLY_SMS" reply_number="900" groups="REPLY_CODE"><![CDATA[.*отправьте код\s(\d+).*]]><![CDATA[html/banks/sberbank/reply_template_pay.html]]></pattern>
+			<pattern comment="Новый общий шаблон - кириллица 18.07.2014" action="INSERT_TO_JURNAL" groups="CARD_TYPE,CARD_NUMBER,DATE,TYPE_OPERATION,SUMMA,VALUT_OPERATION,MESTO,BALANS,VALUT_ACCOUNT"><![CDATA[(\D+)(\d+):\s([\d\s\.:]*\d)\s(.*?)\sна сумму\s([\d\s\.,]*\d)\s?([а-яА-яa-zA-Z]*)\.?\s*(.*?)\.?\s*Баланс:?\s?([\d\s\.,]*\d)\s?([а-яА-яa-zA-Z]*)\.?.*]]></pattern>
+			<pattern comment="Новый общий шаблон - кириллица 01.07.2014" action="INSERT_TO_JURNAL" groups="CARD_TYPE,CARD_NUMBER,DATE,TYPE_OPERATION,SUMMA,VALUT_OPERATION,MESTO,BALANS,VALUT_ACCOUNT"><![CDATA[(\D+)(\d+):\s([\d\s\.:]*\d)\s(.*?)\s([\d\s\.,]*\d)\s?([а-яА-яa-zA-Z]*)\.?\s*(.*?)\.?\s*Доступно:?\s([\d\s\.,]*\d)\s?([а-яА-яa-zA-Z]*)\.?.*]]></pattern>
+			<pattern comment="Новый общий шаблон - кириллица 2" action="INSERT_TO_JURNAL" groups="CARD_TYPE,CARD_NUMBER,DATE,TYPE_OPERATION,SUMMA,VALUT_OPERATION,MESTO,BALANS,VALUT_ACCOUNT"><![CDATA[(\D+)(\d+):\s([\d\s\.:]+)\s(.*?)\s([\d\s\.,]+)\s+(.{1})\.?\s(.*).*?\sБаланс:\s+([\d\s\.,]+)\s(.{1}).*]]></pattern>
+			<pattern comment="Новый общий шаблон - кириллица - без остатка" action="INSERT_TO_JURNAL" groups="CARD_TYPE,CARD_NUMBER,DATE,TYPE_OPERATION,SUMMA,VALUT_OPERATION,MESTO"><![CDATA[(\D{4})(\d+):\s([\d\s\.:]+)\s(.*?)\s([\d\s\.,]+)\s?(.{3})\.?\s(.*).*]]></pattern>
+<!--
+			<pattern comment="Мобильный банк - кириллица 21.07.2014" action="INSERT_TO_JURNAL" groups="CARD_TYPE,CARD_NUMBER,DATE,TYPE_OPERATION,MESTO,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT"><![CDATA[(\D+)(\d+):\s([\d\s\.:]*\d)\s(.*?)\s(за.*)\sна сумму([\d\s\.,]*\d)\s?([а-яА-яa-zA-Z]*)\.?\s*Баланс:?\s?([\d\s\.,]*\d)\s?([а-яА-яa-zA-Z]*)\.?.*]]></pattern>
+-->
 			<pattern comment="Мобильный банк - кириллица" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,MESTO,SUMMA,VALUT_OPERATION,CARD_TYPE,CARD_NUMBER,DATE,BALANS,VALUT_ACCOUNT"><![CDATA[(.*?)\s([\d\s\/-]+)\s.*?\s([\d\s\.,]+)\s?(.{3}).\s?по\sкарте\s(.{2,4})(\d+).*?\s([\d\s\.:]{8}).?\s.*?:\s([\d\s\.,]+).*?\s?(.{3}).*]]></pattern>
 			<pattern comment="Отказ в операции - кириллица" action="INSERT_TO_JURNAL" groups="MESTO,SUMMA,VALUT_OPERATION,CARD_TYPE,CARD_NUMBER,TYPE_OPERATION,DATE"><![CDATA[(.*?)\s([\d\s\.,]+)\s?(.{3}).*?\s(.{2,4})(\d+)\s(не выполнена).\s([\d\s\.:]+).*]]></pattern>
 			<pattern comment="Движение средств - кириллица" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,SUMMA,VALUT_OPERATION,MESTO,CARD_TYPE,CARD_NUMBER,DATE,BALANS,VALUT_ACCOUNT"><![CDATA[(.*?)сумму\s([\d\s\.,]+)\s?(.{3}).\s?(.*?)по\sкарте\s(.{2,4})(\d+).*?\s([\d\s\.:]+)\.\D.*?:\s([\d\s\.,]+).*?\s?(.{3}).*]]></pattern>

@@ -3505,6 +3505,17 @@ DATE"><![CDATA[(.*?)\s?([\d\s\.,]+)\s?(.{3})\s+;KARTA:\*(\d+);.*ADRES:\s?(.*);do
 			<pattern comment="отказ" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,DATE,MESTO"><![CDATA[(\d{4})\s(отказ.*?)\s(\d[\d\s\.]+\d+)\s*([A-Za-zА-Яа-я]{3})\s([\d\.]+\s+\d{2}:\d{2})\s+(.*)]]></pattern>
 		</patterns>
 	</bank>
+	<bank id="126" caption="Нефтепромбанк" serv_numbers="8000" exist_card_oper="false" exist_payees="false" min_pay_summa="0" max_pay_summa="0" icon="bank_ofter" format_dt="HH:mm:ss dd.MM.yyyy" visible_key="false" key_hint="4 посл. цифры счета" number_hint="4 посл. цифры карты"><![CDATA[file:///android_asset/html/banks/info.html]]>
+		<patterns>
+			<types_operation>
+				<type caption="Пополнение счета" oper="+">popolnenie scheta</type>
+				<type caption="Выдача наличных" oper="-">vydacha nalichnyh</type>
+				<type caption="Покупка" oper="-">pokupka</type>
+			</types_operation>
+
+			<pattern comment="Общий шаблон" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,CARD_NUMBER,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT,MESTO,DATE"><![CDATA[(.*?)\skarta:(\d+)\ssumma:(\S[\d\s\.,]+\S)\s(.?[^0-9\s\.]{1,3})\sbalans:(\S[\d\s\.,]+\S)\s(.?[^0-9\s\.]{1,3})\s(.*)\s\(.*MSK\s([\d\s\.:]+)\).*]]></pattern>
+		</patterns>
+	</bank>
 </banks>
 	
 	

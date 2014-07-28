@@ -958,11 +958,10 @@
 			<!--<pattern comment="Ошибка движения средств - кириллица" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,DATE,MESTO,BALANS,VALUT_ACCOUNT"><![CDATA[.*?\*(\d+):\s(.*?)\s?([\d\s\.,]+)\s(.{3});\s?([\d\s:,\/]+);(.*)]]></pattern> -->
 			<pattern comment="Зачисление - кириллица" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,DATE,BALANS,VALUT_ACCOUNT"><![CDATA[.*?\*(\d+):\s(.*?)\s([\d\s\.,]+)\s(.{3});([\d\-]+)\.Доступно\s([\d\s\.,]+)\s(.{3}).*]]></pattern>
 			<pattern comment="Движение средств - латиница" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,DATE,MESTO,BALANS,VALUT_ACCOUNT"><![CDATA[.*?\*(\d+):\s(.*?)\s([\d\s\.,]+)\s(.{3});\s*([\d\s-:,\/]+)[;|.](.*)\.Dostupno\s([\d\s\.,]+)\s(.{3}).*]]></pattern>
-			<pattern comment="Обновление баланса" action="UPDATE_BALANS" groups="CARD_NUMBER,BALANS,VALUT_ACCOUNT"><![CDATA[.*\*(\d+).*?\s([\d\s\.,]+)\s(.{3}).*]]></pattern>
 			<pattern comment="Движение средств - латиница 2" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,CARD_NUMBER,DATE,SUMMA,VALUT_OPERATION,MESTO,BALANS,VALUT_ACCOUNT"><![CDATA[(.*)\s\d+\*+(\d+).?\s([\d\-\s:]+).?\s.*?\s?([\d\s\.,]+)\s(.{3})\s(.*?)\.\w+\s([\d\s\.,]+)\s(.{3}).*]]></pattern>
-			<pattern comment="Только зачисление" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,KEY,DATE,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT"><![CDATA[(.*)\.\s+\d+.*?(\d{4}).?\s([\d\-]+).?.*\s([\d\s\.,]+)\s(.{3})\.\w+\s([\d\s\.,]+)\s(.{3}).*]]></pattern>
+			<pattern comment="Только зачисление" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,KEY,DATE,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT"><![CDATA[.*\*(\d+).*?(\d[\d\s\.]+)\s(\w{3});([\d-]+).*?(\d[\d\s\.]+)\s(\w{3})\.]]></pattern>
 			<pattern comment="Ошибка" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,KEY,DATE,SUMMA,VALUT_OPERATION,MESTO"><![CDATA[(.*)\s+\d+\*+(\d+).?\s([\d\-\s:]+).?.*\s?([\d\s\.,]+)\s(.{3})\s(.*)\..{3}.*]]></pattern>
-			<pattern comment="Информация о балансе" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,BALANS,VALUT_ACCOUNT"><![CDATA[.*\*(\d+)\s.*\s([\d\s\.,]+)\s(.{3}).*]]></pattern>
+			<pattern comment="Информация о балансе" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,BALANS,VALUT_ACCOUNT"><![CDATA[.*\*(\d+).*Dostupno\s+(\d[\d\s\.]+)\s(\w{3})]]></pattern>
 		</patterns>
 	</bank>
 	<bank id="19" caption="BNP Paribas" serv_numbers="+999" exist_card_oper="false" exist_payees="false" min_pay_summa="0" max_pay_summa="0" icon="bank_bnpp" format_dt="dd-MM-yy_HH:mm:ss;dd-MM-yy" visible_key="false" key_hint="" number_hint="№ карты"><![CDATA[file:///android_asset/html/banks/BNPParibas/info.html]]>

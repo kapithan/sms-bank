@@ -951,6 +951,7 @@
 				<type caption="Зачисление средств на счет" oper="+">Zachisleniye sredstv</type>
 				<type caption="Зачисление средств на счет" oper="+">Postuplenie</type>
 				<type caption="Зачисление средств на счет" oper="+">Зачисление</type>
+				<type caption="Зачисление средств на счет" oper="+">Zachisleniye</type>
 				<type caption="Ошибка операции" oper="?">Neuspeshno</type>
 			</types_operation>
 			<!-- http://regexr.com?31vad 28.08.2012 -->
@@ -959,7 +960,7 @@
 			<pattern comment="Зачисление - кириллица" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,DATE,BALANS,VALUT_ACCOUNT"><![CDATA[.*?\*(\d+):\s(.*?)\s([\d\s\.,]+)\s(.{3});([\d\-]+)\.Доступно\s([\d\s\.,]+)\s(.{3}).*]]></pattern>
 			<pattern comment="Движение средств - латиница" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,DATE,MESTO,BALANS,VALUT_ACCOUNT"><![CDATA[.*?\*(\d+):\s(.*?)\s([\d\s\.,]+)\s(.{3});\s*([\d\s-:,\/]+)[;|.](.*)\.Dostupno\s([\d\s\.,]+)\s(.{3}).*]]></pattern>
 			<pattern comment="Движение средств - латиница 2" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,CARD_NUMBER,DATE,SUMMA,VALUT_OPERATION,MESTO,BALANS,VALUT_ACCOUNT"><![CDATA[(.*)\s\d+\*+(\d+).?\s([\d\-\s:]+).?\s.*?\s?([\d\s\.,]+)\s(.{3})\s(.*?)\.\w+\s([\d\s\.,]+)\s(.{3}).*]]></pattern>
-			<pattern comment="Только зачисление" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,KEY,DATE,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT"><![CDATA[.*\*(\d+).*?(\d[\d\s\.]+)\s(\w{3});([\d-]+).*?(\d[\d\s\.]+)\s(\w{3})\.]]></pattern>
+			<pattern comment="Только зачисление" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,DATE,BALANS,VALUT_ACCOUNT"><![CDATA[.*\*(\d+):\s(.*?)\s(\d[\d\s\.]+)\s(\w{3});([\d-]+).*?(\d[\d\s\.]+)\s(\w{3})\.]]></pattern>
 			<pattern comment="Ошибка" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,KEY,DATE,SUMMA,VALUT_OPERATION,MESTO"><![CDATA[(.*)\s+\d+\*+(\d+).?\s([\d\-\s:]+).?.*\s?([\d\s\.,]+)\s(.{3})\s(.*)\..{3}.*]]></pattern>
 			<pattern comment="Информация о балансе" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,BALANS,VALUT_ACCOUNT"><![CDATA[.*\*(\d+).*Dostupno\s+(\d[\d\s\.]+)\s(\w{3})]]></pattern>
 		</patterns>

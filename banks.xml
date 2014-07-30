@@ -290,7 +290,7 @@
             <pattern comment="За СМС" action="INSERT_TO_JURNAL" groups="DATE,TYPE_OPERATION,SUMMA,VALUT_OPERATION,BALANS"><![CDATA[.*\s([\d\s\.:]+)\s(Za\sSMS.*?)\s-([\d.]+)\s(.{3})\s?.*?:\s([\d\.]+)\s.*]]></pattern>
         </patterns>
     </bank>
-	<bank id="2" caption="Райффайзенбанк" serv_numbers="7243,raiffeisen,Raiffeisen" exist_card_oper="true" exist_payees="false" min_pay_summa="0" max_pay_summa="0" icon="bank_raifaizen" format_dt="dd/MM/yyyy;dd.MM.yyyy" visible_key="true" key_hint="4 посл. цифры счета" number_hint="4 посл. цифры номера"><![CDATA[file:///android_asset/html/banks/raifaizen/info.html]]>
+	<bank id="2" caption="Райффайзенбанк" serv_numbers="7243,Raiffeisen" exist_card_oper="true" exist_payees="false" min_pay_summa="0" max_pay_summa="0" icon="bank_raifaizen" format_dt="dd/MM/yyyy;dd.MM.yyyy" visible_key="true" key_hint="4 посл. цифры счета" number_hint="4 посл. цифры номера"><![CDATA[file:///android_asset/html/banks/raifaizen/info.html]]>
 		<!-- платежи не осуществляются, с один кодом (последние 4 цифры) не может быть две одинаковых карты-->
 		<card_types_codes>
 			<card_types_code code="VISA" template="VISA"/>

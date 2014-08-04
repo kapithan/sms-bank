@@ -273,22 +273,25 @@
         </card_operations>
         <patterns>
             <types_operation>
-                <type caption="Зачисление средств" oper="+">Balans karty uvelichen</type>
+                <type caption="Зачисление средств" oper="+">Balans karty uvelichen na</type>
                 <type caption="Внесение наличных" oper="+">Vnesenie sredstv</type>
                 <type caption="Оплата услуг" oper="-">Oplata uslug</type>
                 <type caption="Оплата покупки" oper="-">Покупка</type>
                 <type caption="Выдача наличных" oper="-">Vydacha sredstv</type>
                 <type caption="Комиссия за СМС" oper="-">Za SMS</type>
                 <type caption="Отклонение операции" oper="?">Operacija otklonena</type>
+				<type caption="Операция в банке" oper="-">Операция в Банке</type>
+				<type caption="Выдача наличных" oper="-">Выдача средств</type>
             </types_operation>
             <!-- http://regexr.com?31h76 16.03.2013 -->
             <!-- Парсинг смс, в которых нет номера карты не осуществляется. Чтоб не приводило к пробросу смс в другую карту. -->
-            <pattern comment="Обновление баланса" action="UPDATE_BALANS" groups="DATE,TYPE_OPERATION,SUMMA,BALANS"><![CDATA[.*?([\d\s\.:]+)\s(.*?):\s([\d.]+)\s?.*:\s([\d\.]+)\sstatus:\s.*\sinfo:\s..]]></pattern>            
-            <!-- <pattern comment="Зачисление средств" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,DATE,TYPE_OPERATION,SUMMA,VALUT_OPERATION,BALANS"><![CDATA[.*#.*?(\d+)\s([\d\s\.:]+)\s(.*?)\s([\d.]+)\s(.{3})\s?.*:\s([\d\.]+).]]></pattern> -->
+            <pattern comment="Зачисление средств" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,DATE,TYPE_OPERATION,SUMMA,VALUT_OPERATION,BALANS"><![CDATA[.*?(\d{4})\s([\d\s\.:]+)\s(.*?)\s([\d.]+)\s(.{3}).*:\s+(\d+\.\d{2})\.$]]></pattern>
             <pattern comment="Расход средств" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,DATE,TYPE_OPERATION,SUMMA,VALUT_OPERATION,BALANS,MESTO"><![CDATA[(.*?(\d{4})\s([\d\s\.:]+)\s(.*?)\s([\d.]+)\s(.{3})\s?.*:\s([\d\.]+).\s(.*)]]></pattern>
             <pattern comment="Отклонение операции" action="INSERT_TO_JURNAL" groups="DATE,TYPE_OPERATION,BALANS,MESTO"><![CDATA[.*?\s([\d\s\.:]+)\s(.*?otklonena):.*\s([\d.]+)\s(.*)]]></pattern>
             <pattern comment="За СМС" action="INSERT_TO_JURNAL" groups="DATE,TYPE_OPERATION,SUMMA,VALUT_OPERATION,BALANS"><![CDATA[.*\s([\d\s\.:]+)\s(Za\sSMS.*?)\s-([\d.]+)\s(.{3})\s?.*?:\s([\d\.]+)\s.*]]></pattern>
-        </patterns>
+			<pattern comment="Обновление баланса кирилица" action="UPDATE_BALANS" groups="CARD_NUMBER,DATE,BALANS"><![CDATA[.*\sКарта\s(\d{4}).*Доступно:\s(\d+\.\d+)]]></pattern>
+			<pattern comment="Обновление баланса латиница" action="UPDATE_BALANS" groups="CARD_NUMBER,DATE,BALANS"><![CDATA[.*karty\s(\d{4})\s([\d\.]+).*available:\s(\d+\.\d+)]]></pattern>
+		</patterns>
     </bank>
 	<bank id="2" caption="Райффайзенбанк" serv_numbers="7243,Raiffeisen" exist_card_oper="true" exist_payees="false" min_pay_summa="0" max_pay_summa="0" icon="bank_raifaizen" format_dt="dd/MM/yyyy;dd.MM.yyyy" visible_key="true" key_hint="4 посл. цифры счета" number_hint="4 посл. цифры номера"><![CDATA[file:///android_asset/html/banks/raifaizen/info.html]]>
 		<!-- платежи не осуществляются, с один кодом (последние 4 цифры) не может быть две одинаковых карты-->

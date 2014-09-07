@@ -1535,7 +1535,7 @@
 			<pattern comment="Движение средств" action="INSERT_TO_JURNAL" groups="BALANS"><![CDATA[.*[W|\*]\s?LIMIT:([\d\.]+).*]]></pattern>
 		</patterns>
 	</bank>
-	<bank id="41" caption="Дальневосточный Банк" serv_numbers="+79025577070,+79020700300,+79021129973,DVB" exist_card_oper="true" exist_payees="false" min_pay_summa="0" max_pay_summa="0" icon="bank_dvb" format_dt="dd/MM/yy HH:mm:ss" useSmsDate="false" visible_key="true" key_hint="Код запроса" number_hint="4 посл. цифры карты"><![CDATA[file:///android_asset/html/banks/dvb/info.html]]>
+	<bank id="41" caption="Дальневосточный Банк" serv_numbers="+79025577070,+79020700300,+79021129973,DVB" exist_card_oper="true" exist_payees="false" min_pay_summa="0" max_pay_summa="0" icon="bank_dvb" format_dt="dd.MM.yy HH:mm:ss" useSmsDate="false" visible_key="true" key_hint="Код запроса" number_hint="4 посл. цифры карты"><![CDATA[file:///android_asset/html/banks/dvb/info.html]]>
 		<card_operations>
 			<card_operation template="BAL #KEY#" caption="Баланс (лимит доступных средств)"><![CDATA[file:///android_asset/html/banks/dvb/balans_info.html]]></card_operation>
 			<card_operation template="STM #KEY#" caption="Выписка по карте"/>
@@ -1557,7 +1557,7 @@
 			</types_operation>
 			<!-- -->
 			<pattern comment="Пополнение счета" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT,DATE"><![CDATA[Schet.*\*\*(\d+)\.\s(.*)\.\sSumma\s+([\d\.\s]+)\s+([a-zA-Z]{3});.*?([\d\.]+)\s+([a-zA-Z]{3})(.*)]]></pattern>
-			<pattern comment="Списание за услугу SMS-информирование" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,SUMMA,VALUT_OPERATION,TYPE_OPERATION,BALANS,VALUT_ACCOUNT,DATE"><![CDATA[.*\*\*(\d+),\s+.*?,\s+summa\s+-([\d\.]+)\s+(.{3})\s+\((SMS.*),,,\).*?([\d\.]+)\s+(.{3})\s-\s([\d\.\s:]+)]]></pattern>
+			<pattern comment="Списание за услугу SMS-информирование" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,SUMMA,VALUT_OPERATION,TYPE_OPERATION,BALANS,VALUT_ACCOUNT,DATE"><![CDATA[.*\*\*(\d+),\s+.*?,\s+summa\s+-([\d\.,]+)\s+(.{3})\s+\((SMS.*),,,\).*?([\d\.]+)\s+(.{3})\s-\s([\d\.\s:]+)]]></pattern>
 			<pattern comment="Операции по карте" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,SUMMA,VALUT_OPERATION,TYPE_OPERATION,MESTO,BALANS,VALUT_ACCOUNT,DATE"><![CDATA[.*\*\*(\d+).*?summa\s+([\d\.]+)\s+(.{3})\s+\((.*?),\s+(.*)\).*?([\d\.]+)\s+(.{3})\s-\s([\d\.\s:]+)]]></pattern>
 			<pattern comment="Отмена операции" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,MESTO,BALANS,VALUT_ACCOUNT,DATE"><![CDATA[.*\*\*(\d+),\s+(otme.*?)\s+na\s+summu\s+([\d\.]+)\s+(.{3})\s+\((.*)\).*?([\d\.]+)\s+(.{3})\s-\s([\d\.\s:]+)]]></pattern>
 			<pattern comment="Отказ в оплате" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,MESTO,DATE"><![CDATA[.*\*\*(\d+)\s+(.*?)\sna\ssummu\s+([\d\.]+)\s+(.{3})\s+\((.*?)\s+([\d{2}\.+]+\s+[\d{2}:+]+)]]></pattern>

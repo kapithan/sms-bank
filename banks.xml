@@ -820,17 +820,7 @@
 				<type caption="Зачисление средств" oper="+">Zachislenie</type>
 				<type caption="Зачисление средств" oper="+">Payment to card</type>
 			</types_operation>
-			<!-- http://regexr.com?31k9h 24.07.2012 -->
-			<!-- Новый вид от 24.07.2012 -->
-			<!-- <pattern comment="Списание с карты" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,SUMMA,VALUT_OPERATION,CARD_NUMBER,MESTO,BALANS,VALUT_ACCOUNT"><![CDATA[(.*?)\s([\d\.]+)\s(.{3})\s.*\*(\d+)\s.*:\s(.*)\sDate.*\s.*:\s([\d\.]+)\s(.{3}).*]]></pattern>
-			<pattern comment="Списание с карты" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,VALUT_OPERATION,SUMMA,CARD_NUMBER,MESTO,VALUT_ACCOUNT,BALANS"><![CDATA[(.*?)\s(.{3})\s([\d\.]+)\s.*\*(\d+)\s.*:\s(.*)\sDate.*\s.*:\s(.{3})\s([\d\.]+).*]]></pattern> -->
-			<!-- странный вид -->
-			<!-- <pattern comment="Списание с карты" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,CARD_NUMBER,VALUT_OPERATION,SUMMA,MESTO,DATE,VALUT_ACCOUNT,BALANS"><![CDATA[(.*)\*(\d+)\s.*:\s(.{3})\s+([\d\.,]+)\s.*:\s(.*)\s.*:\s(.*?)\s.*:\s(.{3})\s([\d\.,]+)]]></pattern> -->
-			<!-- для кредитной карты -->
-			<!-- <pattern comment="Списание с карты" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,SUMMA,VALUT_OPERATION,CARD_NUMBER,MESTO,DATE,BALANS,VALUT_ACCOUNT"><![CDATA[(.*):\s([\d\.]+)\s(.{3});\s.*:\s(\d+);\s\w+:\s(.*).;\s.*:\s([\d\.]+);\s.*:\s([\d\.]+)\s(.{3})]]></pattern>
-			<pattern comment="Списание с карты" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,CARD_NUMBER,SUMMA,VALUT_OPERATION,MESTO,DATE,BALANS,VALUT_ACCOUNT"><![CDATA[(.*)\s\*\*(\d+)\s.*\s([\d\.,]+)\s(.{3}).?\s.*:\s(.*).?\sData:\s([\d\/]+)\s.*:\s([\d\.,]+)\s(.{3})]]></pattern>
-			<pattern comment="Обновление баланса" action="UPDATE_BALANS" groups="CARD_NUMBER,BALANS,VALUT_ACCOUNT"><![CDATA[.*%.*\*(\d+)\s.*:\s([\d\.]+)\s(.{3})\s.*:\s([\d\/]+)]]></pattern>
-			<pattern comment="Зачисление на карту" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,CARD_NUMBER,SUMMA,VALUT_OPERATION,DATE,BALANS,VALUT_ACCOUNT"><![CDATA[(.*)\*(\d+)\s.*:\s([\d\.]+)\s(.{3})\s.*:\s([\d\/]+)\s.*:\s([\d\.]+)\s(.{3})]]></pattern> -->
+	
 			<pattern comment="списание с кредитной карты" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,CARD_NUMBER,SUMMA,VALUT_OPERATION,DATE,BALANS,VALUT_ACCOUNT"><![CDATA[(.*)\s\*\*(\d+).*?:\s([\d\.,]+)\s(.{3})\s.*?:\s([\d\/]+).*?:\s([\d\.,]+)\s(\w{3})]]></pattern>
 			<pattern comment="Зачисление на кредитную карту" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,CARD_NUMBER,SUMMA,VALUT_OPERATION,DATE"><![CDATA[(.*)\s\*\*(\d+);.*:\s([\d\.,]+)\s(\w{3}).*\r?\n?.*?:\s([\d\.,]+)\s(\w{3})]]></pattern>
 			<pattern comment="Обновление баланса" action="UPDATE_BALANS" groups="CARD_NUMBER,BALANS,VALUT_ACCOUNT"><![CDATA[.*karta:\s(\d+);\s.*:\s([\d\.]+)\s(.{3})]]></pattern>

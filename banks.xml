@@ -266,7 +266,7 @@
 			<pattern comment="Отказы" action="INSERT_TO_JURNAL" groups="CARD_TYPE,CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,MESTO,DATE,BALANS,VALUT_ACCOUNT"><![CDATA[(\D{4})(\d+);\s(.*);\sSumma:([\d\.]+)(.{3});\s([\d\.]+\s[\d:]+);.*\sDostupno:\s?([\d\.]+)(.{3}).*]]></pattern>
 		</patterns>
 	</bank>
-	<bank id="1" caption="Юникредит банк" serv_numbers="4626,+79165904505,UniCredit" exist_card_oper="true" exist_payees="false" min_pay_summa="0" max_pay_summa="0" icon="bank_unicredit" format_dt="dd.MM.yyyy HH:mm;dd.MM.yyyy" visible_key="true" key_hint="Ключевое слово" number_hint="4 посл. цифры карты"><![CDATA[file:///android_asset/html/banks/unicredit/info.html]]>
+	<bank id="1" caption="Юникредит банк" serv_numbers="4626,+79165904505,UniCredit" exist_card_oper="true" exist_payees="false" min_pay_summa="0" max_pay_summa="0" icon="bank_unicredit" format_dt="dd.MM.yyyy HH:mm;dd.MM.yyyy" visible_key="true" key_hint="типо тест слово" number_hint="типо тест номер"><![CDATA[file:///android_asset/html/banks/unicredit/info.html]]>
         <card_operations>
             <card_operation template="Cb #KEY#" caption="Баланс (лимит доступных средств)"><![CDATA[file:///android_asset/html/banks/unicredit/balans_info.html]]></card_operation>
             <card_operation template="BC #KEY#" caption="Блокировка карты"><![CDATA[file:///android_asset/html/banks/unicredit/blockcard_info.html]]></card_operation>

@@ -591,7 +591,7 @@
 			<!-- НИЖЕ - другой шаблон до 23.05.12 -->
 			<pattern comment="Движение средств" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,RESULT_OPERATION,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT,MESTO,DATE"><![CDATA[\d\*(\d+);\s(.*);\s(Uspeshno);\s.*:\s([\d\s\.,]+)\s(.{3});.*:\s([\d\s\.,]+)\s(.{3});\s(.*);\s([\d\s\.:]+)]]></pattern>
 			<pattern comment="Движение средств - отмена" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,RESULT_OPERATION,SUMMA,VALUT_OPERATION,MESTO,DATE"><![CDATA[\d\*(\d+);\s(.*);\s(Uspeshno);\s.*:\s([\d\s\.,]+)\s(.{3});.*;\s(.*);\s([\d\s\.:]+)]]></pattern>
-			<pattern comment="Движение средств - без подтверждения (Uspeshno)" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT,DATE"><![CDATA[\d\*(\d+);\s(.*);.*:\s([\d\s\.,]+)\s(.{3});.*:\s([\d\s\.,]+)\s(.{3});\s([\d\s\.:]+)]]></pattern>
+			<pattern comment="Движение средств - без подтверждения (Uspeshno)" action="INSERT_TO_JURNAL" groups="CARD_NUMBER,TYPE_OPERATION,SUMMA,VALUT_OPERATION,BALANS,VALUT_ACCOUNT,DATE"><![CDATA[\d\*(\d+);\s(.*);.*:\s([\d\s\.,]+)\s(.{3});.*:\s([-\d\s\.,]+)\s(.{3});\s([\d\s\.:]+)]]></pattern>
 			<pattern comment="Движение средств - работа со счетом" action="INSERT_TO_JURNAL" groups="TYPE_OPERATION,KEY,SUMMA,VALUT_OPERATION,MESTO,DATE"><![CDATA[(.*)\s\d+\s?\*\s?(\d+)\s.*\s([\d\s\.,]+)\s(.{3}).\s(.*?);\s([\d\s\.:]+).*]]></pattern>
 			<pattern comment="Обновление баланса - типа карты нет, только номер, может быть несколько карт - разбивается на несколько" action="UPDATE_BALANS" groups="CARD_NUMBER,BALANS,VALUT_ACCOUNT"><![CDATA[.*\d+\*(\d+)[\s-]+([\d\s\.,]+)(.{3})]]></pattern>
 			
